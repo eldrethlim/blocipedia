@@ -1,14 +1,73 @@
+<!-- app/views/layouts/application.html.erb -->
+
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Blocipedia</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
 
-<%= yield %>
+<div class="container">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" <%=link_to "Blocipedia", root_path %></a>
+      </div>
+
+      <div class="collapse navbar-collapse navbar-exl-collapse">
+        <ul class="nav navbar-nav">
+          <li><%= link_to "About", about_path %></li>
+        </ul>
+
+          <div class="pull-right user-info">
+            <% if current_user %>
+              <%= image_tag(current_user.avatar.tiny.url) if current_user.avatar? %>
+              Welcome back <%= link_to (current__user.name), current_user %>!
+              <%= link_to edit_user_registration_path, class: 'btn btn-primary btn-sm' do %>
+                <span class="glyphicon glyphicon-user"></span>
+              <% end %>
+
+              <%= link_to destroy_user_session_path, method: :delete, class: 'btn btn-primary btn-sm' do %>
+                <span class="glyphicon glyphicon log-out"></span>
+              <% end %>
+            <% else %>
+              <%= link_to "Sign In", new_user_session_path %> or
+              <%= link_to "Sign Up", new_user_registration_path %>
+            <% end %>
+        
+      </div>
+    </div>
+  </nav>
+</div>
+
+  <% if flash[:notice] %>
+    <div class="alert alert-success">
+      <button type= "button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:notice] %>
+    </div>
+  <% elsif flash[:error] %>
+    <div class="alert alert-danger">
+      <button type= "button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:error] %>
+    </div>
+  <% elsif flash[:alert] %>
+    <div class="alert">
+      <button type= "button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <%= yield %>
 
 </body>
+
 </html>

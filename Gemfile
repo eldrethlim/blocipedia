@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.5'
 
+# Country selector
+gem 'country_select', github: 'stefanpenner/country_select'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 
@@ -37,6 +40,15 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
+
+#Bootstrap Theme
+gem 'bootstrap-sass', '~> 3.2.0'
+
+#Devise
+gem 'devise'
+
+#Figaro
+gem 'figaro'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
