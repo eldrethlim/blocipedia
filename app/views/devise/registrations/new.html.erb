@@ -1,44 +1,73 @@
 <!-- app/views/devise/registration/new.html.erb -->
 
+<%= stylesheet_link_tag    "userpage", media: "all", "data-turbolinks-track" => true %>
+
 <div class="container">
-<h2>Sign up</h2>
+<div class="align">
+  <h2>Sign up</h2>
   
-  <div class="row">
-    
-    <div class="col-md-6">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= devise_error_messages! %>
+    <div class="row">
 
-    <div class= "form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: "Enter your name" %>
-    </div>
+      <div class="col-md-6">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
 
-    <div class= "form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control', placeholder: "Enter email" %>
-    </div>
+      <div class="spacing form-group">
+        <%= f.label :username %>
+        <%= f.text_field :username, class: 'form-control', placeholder: "Enter your user name" %>
+      </div>
 
-    <div class="form-group">
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control', placeholder: "Enter password", autocomplete: "off" %>
-    </div>
+      <div class= "spacing form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: "Enter your name" %>
+      </div>
 
-    <div class="form-group">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Enter password confirmation", autocomplete: "off" %>
-    </div>
+      <div class= "spacing form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control', placeholder: "Enter email" %>
+      </div>
 
-    <div class="form-group">
-    <%= f.submit "Sign up", class: 'btn btn-success' %>
-    </div>
+      <div class="spacing form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control', placeholder: "Enter password", autocomplete: "off" %>
+      </div>
 
-    <div class="form-group">
-      <%= render "devise/shared/links" %>
-    </div>
+      <div class="spacing form-group">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Enter password confirmation", autocomplete: "off" %>
+      </div>
+
+      <div class="spacing form-group">
+        <%= f.label :address %>
+        <%= f.text_field :address, class: 'form-control', placeholder: "Enter password", autocomplete: "off" %>
+      </div>
+
+      <div class="spacing form-group">
+        <%= f.label :postcode %>
+        <%= f.text_field :postcode, class: 'form-control', placeholder: "Enter ZIP code", autocomplete: "off" %>
+      </div>
+
+      <div class="spacing form-group">
+        <%= f.label :state %>
+        <%= f.text_field :state, class: 'form-control', placeholder: "Enter state", autocomplete: "off" %>
+      </div>
+
+      <div class="spacing form-group">
+        <%= f.label :country, "Country" %>
+        <%= f.country_select :country %>
+      </div>
+
+      <div class="spacing form-group">
+        <%= f.submit "Sign up", class: 'btn btn-success' %>
+      </div>
+
+      <div class="spacing form-group">
+        <%= render "devise/shared/links" %>
+      </div>
   
-  <% end %>
-  
+      <% end %>
+    </div>
   </div>
+
 </div>
 </div>

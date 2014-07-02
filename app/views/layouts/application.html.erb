@@ -1,6 +1,5 @@
 <!-- app/views/layouts/application.html.erb -->
 
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -30,14 +29,14 @@
 
           <div class="pull-right user-info">
             <% if current_user %>
-              <%= image_tag(current_user.avatar.tiny.url) if current_user.avatar? %>
-              Welcome back <%= link_to (current__user.name), current_user %>!
+              <%= image_tag(current_user.profilepic.tiny.url) if current_user.profilepic? %>
+              Welcome back <%= link_to (current_user.name), current_user %>!
               <%= link_to edit_user_registration_path, class: 'btn btn-primary btn-sm' do %>
                 <span class="glyphicon glyphicon-user"></span>
               <% end %>
 
               <%= link_to destroy_user_session_path, method: :delete, class: 'btn btn-primary btn-sm' do %>
-                <span class="glyphicon glyphicon log-out"></span>
+                <span class="glyphicon glyphicon-log-out"></span>
               <% end %>
             <% else %>
               <%= link_to "Sign In", new_user_session_path %> or
@@ -47,7 +46,7 @@
       </div>
     </div>
   </nav>
-</div>
+
 
   <% if flash[:notice] %>
     <div class="alert alert-success">
@@ -67,6 +66,8 @@
   <% end %>
 
   <%= yield %>
+
+  </div>
 
 </body>
 
