@@ -2,8 +2,7 @@
 
 <%= stylesheet_link_tag    "userpage", media: "all", "data-turbolinks-track" => true %>
 
-<div class="container">
-<div class="align">
+<div class="container align">
   <h2>Sign up</h2>
   
     <div class="row">
@@ -33,7 +32,7 @@
       </div>
 
       <div class="spacing form-group">
-        <%= f.label :password_confirmation %><br />
+        <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Enter password confirmation", autocomplete: "off" %>
       </div>
 
@@ -53,7 +52,7 @@
       </div>
 
       <div class="spacing form-group">
-        <%= f.label :country, "Country" %>
+        <%= f.label :country, "Country:" %>
         <%= f.country_select :country %>
       </div>
 
@@ -68,6 +67,4 @@
       <% end %>
     </div>
   </div>
-
-</div>
 </div>
