@@ -1,0 +1,18 @@
+<!-- app/views/charges/new.html.erb -->
+
+<%= form_tag charges_path do %>
+  
+  <%= hidden_field_tag :amount, @stripe_btn_data[:amount] %>
+
+  <h4>Click the button!</h4>
+  <form action="" method="POST">
+  <script 
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<%= @stripe_btn_data[:key] %>" 
+    data-name="Blocipedia Membership"
+    data-amount=<%= +@stripe_btn_data[:amount] %> 
+    data-description="<%= @stripe_btn_data[:description] %>" >
+  </script>
+  </form>
+
+<% end %>
