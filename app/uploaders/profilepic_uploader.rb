@@ -32,10 +32,6 @@ class ProfilepicUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  version :tiny do
-    process resize_to_fill: [20, 20]
-  end
-
   version :small do
     process resize_to_fill: [30,30]
   end
