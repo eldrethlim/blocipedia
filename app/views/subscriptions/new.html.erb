@@ -1,0 +1,17 @@
+<%= stylesheet_link_tag    "userpage", media: "all", "data-turbolinks-track" => true %>
+
+<% @plans.each do |plan| %>
+  <div class="align">
+    <%= plan.name %>
+    <form action="<%= subscriptions_path %>" method="POST">
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+        data-name="Blocipedia Premium Subscription"
+        data-label="Subscribe"
+        data-description="<%= plan.name %>">
+      </script>
+      <%= hidden_field_tag :plan_id, plan.id %>
+    </form>
+  </div>
+<% end %>

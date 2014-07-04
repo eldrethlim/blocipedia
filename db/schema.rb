@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702095206) do
+ActiveRecord::Schema.define(version: 20140704113025) do
+
+  create_table "plans", force: true do |t|
+    t.string  "stripe_id"
+    t.string  "name"
+    t.decimal "price"
+    t.integer "duration"
+  end
+
+  create_table "subscriptions", force: true do |t|
+    t.integer "plan_id"
+    t.integer "user_id"
+    t.string  "stripe_customer_id"
+  end
 
   create_table "users", force: true do |t|
     t.string   "username",               default: "", null: false
@@ -37,6 +50,9 @@ ActiveRecord::Schema.define(version: 20140702095206) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "profilepic"
+    t.integer  "role"
+    t.integer  "plan_id"
+    t.string   "stripe_customer_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

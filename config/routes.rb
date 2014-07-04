@@ -1,17 +1,26 @@
 Blocipedia::Application.routes.draw do
 
-  get 'charges/new'
+  get 'plans/index'
 
-  devise_for :users
-  resources :users
-
-  get 'about' => 'welcome#about'
+  get 'subscription/options'
 
   root to: 'welcome#index'
 
-  Blocipedia::Application.routes.draw do
-  get 'charges/new'
+  get 'wikis/new'
 
-    resources :charges, only: [:new, :create]
-  end
+  get 'wikis/view'
+
+  get 'wikis/edit'
+
+  get 'wikis/index'
+
+  get 'about' => 'welcome#about'
+
+  devise_for :users
+
+  resources :users
+  resources :wikis
+  resources :subscriptions
+  resources :plans
+
 end

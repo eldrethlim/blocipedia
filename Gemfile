@@ -69,6 +69,9 @@ gem 'stripe'
 #User Authorization
 gem 'pundit'
 
+#Friendly_ID
+gem 'friendly_id'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
