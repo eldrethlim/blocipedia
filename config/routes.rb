@@ -1,5 +1,7 @@
 Blocipedia::Application.routes.draw do
 
+  get 'categories/index'
+
   get 'plans/index'
 
   get 'subscription/options'

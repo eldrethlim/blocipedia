@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 
   has_one :subscription
+  validates_uniqueness_of :username
+  validates_uniqueness_of :email
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

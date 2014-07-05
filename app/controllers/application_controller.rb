@@ -4,6 +4,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  rescue_from Pundit::NotAuthorizedError do |exception|
+    redirect_to root_url, alert: exception.message
+  end
+
+  def store_location
+    session[:previous_url] = request.fullpath unless request.fullpath =~ (/\/users/ || /\/subscriptions/)
+  end
+
+  rescue_from Pundit::NotAuthorizedError do |exception|
+    redirect_to session[:previousl_url] || root_path, alert: exception.message
+  end
 
   protected
 
