@@ -1,28 +1,26 @@
 Blocipedia::Application.routes.draw do
 
-  get 'categories/index'
+  get 'subpages/index'
 
-  get 'plans/index'
+  get 'subpages/new'
 
-  get 'subscription/options'
+  get 'subpages/shot'
+
+  get 'subpages/edit'
 
   root to: 'welcome#index'
-
-  get 'wikis/new'
-
-  get 'wikis/view'
-
-  get 'wikis/edit'
-
-  get 'wikis/index'
 
   get 'about' => 'welcome#about'
 
   devise_for :users
 
   resources :users
-  resources :wikis
   resources :subscriptions
   resources :plans
+  resources :wikis do
+    resources :pages do
+      resources :subpages
+    end
+  end
 
 end

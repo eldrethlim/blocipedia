@@ -57,11 +57,8 @@ gem 'fog'
 gem 'carrierwave'
 gem 'mini_magick'
 
-#Mardown
+#Markdown
 gem 'redcarpet'
-
-#Epic Editor
-gem 'epic-editor-rails', '~> 0.2.3'
 
 #E-commerce
 gem 'stripe'

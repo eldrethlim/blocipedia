@@ -1,4 +1,4 @@
-class WikiPolicy < ApplicationPolicy
+class PagePolicy < ApplicationPolicy
 
   def index?
   end

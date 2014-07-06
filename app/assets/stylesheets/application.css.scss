@@ -1,4 +1,10 @@
 @import "bootstrap";
+@import 'base/epiceditor';  
+@import 'preview/bartik';  
+@import 'preview/github';  
+@import 'preview/preview-dark';  
+@import 'editor/epic-dark';  
+@import 'editor/epic-light';  
 
 div.pad0
 {
@@ -13,4 +19,52 @@ div.pagewidth
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+div.align {
+  margin-top: 50px;
+  margin-left: 100px;
+}
+
+div.align-edit {
+  margin-top: 35px;
+  margin-left: 65px;
+}
+
+div.spacing {
+  margin-top: 20px;
+}
+
+div.pagewidth
+{
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+div.font
+{
+  font-size: 18px;
+}
+
+div.showspacing {
+  margin-top: 25px;
+}
+
+#epiceditor {
+  width: 900px;
+  height: 800px;
+  border-style:solid;
+  border-width:1px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#editor {
+  width: 900px;
+  height: 800px;
+  border-style:solid;
+  border-width:1px;
+  margin-left: auto;
+  margin-right: auto; 
 }

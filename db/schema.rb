@@ -11,13 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140704113025) do
+ActiveRecord::Schema.define(version: 20140706061734) do
+
+  create_table "pages", force: true do |t|
+    t.string   "title"
+    t.integer  "wiki_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
   create_table "plans", force: true do |t|
     t.string  "stripe_id"
     t.string  "name"
     t.decimal "price"
     t.integer "duration"
+  end
+
+  create_table "subpages", force: true do |t|
+    t.integer  "page_id"
+    t.string   "name"
+    t.text     "body"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "subscriptions", force: true do |t|
@@ -58,5 +76,14 @@ ActiveRecord::Schema.define(version: 20140704113025) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["username"], name: "index_users_on_username", unique: true
+
+  create_table "wikis", force: true do |t|
+    t.string   "name"
+    t.boolean  "public"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
 end

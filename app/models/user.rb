@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  has_many :wikis
+  has_many :pages
   has_one :subscription
   validates_uniqueness_of :username
   validates_uniqueness_of :email

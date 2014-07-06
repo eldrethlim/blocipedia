@@ -1,0 +1,75 @@
+<!-- app/views/wikis/_forms.html.erb -->
+
+<%=form_for [wiki] do |f| %>
+
+    <div class="alert alert-danger">
+      <h4> There are <%= pluralize(post.errors.count, "error") %>.</h4>
+      <ul>
+        <% post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label "Wiki Name" %>
+    <%= f.text_field :title, class: 'form-control', placeholder: "Enter page name" %>
+  </div>
+
+  <div class="form-group epiceditor">
+    <%= f.label "Front Page Contents" %>
+    <%= f.text_area :description, class: 'form-control my-edit-area' %>
+  </div>
+  <script src="js/epiceditor.js"></script>
+  <script>
+    var opts = {
+      container: 'epiceditor',
+      textarea: 'my-edit-area',
+      basePath: 'epiceditor',
+      clientSideStorage: false,
+      localStorageName: 'epiceditor',
+      useNativeFullscreen: true,
+      parser: marked,
+      file: {
+        name: 'epiceditor',
+        defaultContent: '',
+        autoSave: 100
+      },
+      theme: {
+        base: 'assets/stylesheets/base/epiceditor.css',
+        preview: 'assets/stylesheets/bootstrap.css',
+        editor: 'assets/stylesheets/epic-dark.css'
+      },
+      button: {
+        preview: true,
+        fullscreen: true,
+         bar: "true"
+      },
+      focusOnLoad: false,
+      shortcut: {
+        modifier: 18,
+        fullscreen: 70,
+        preview: 80
+      },
+      string: {
+        togglePreview: 'Toggle Preview Mode',
+        toggleEdit: 'Toggle Edit Mode',
+        toggleFullscreen: 'Enter Fullscreen'
+      },
+      autogrow: true
+    }
+    window.onload=function(){
+    var editor = new EpicEditor().load();
+    }
+  </script>
+
+  <div class="checkbox">
+    <%= f.label "Privacy settings", class: 'checkbox' do %>
+      <%= f.check_box :public %> Private Wiki
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Save Wiki", class: 'btn btn-success' %>
+  </div>
+<% end %>
