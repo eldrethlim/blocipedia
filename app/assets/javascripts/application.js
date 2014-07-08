@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-//= require epiceditor.min.js
 
 $('.carousel').carousel({
   interval: 8000

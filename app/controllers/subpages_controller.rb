@@ -4,7 +4,7 @@ class SubpagesController < ApplicationController
     @wiki = Wiki.find(params[:wiki_id])
     @page = Wiki.pages.find(params[:page_id])
     @subpage = Subpage.new
-    authorize @wiki
+    authorize @subpage
   end
 
   def create
@@ -14,7 +14,7 @@ class SubpagesController < ApplicationController
     @subpage = @page.subpage
     @subpage = current_user.subpages.build(subpage_params)
 
-    authorize @wiki
+    authorize @subpage
     if @subpage.save
       redirect_to @subpage, notice: "Sub-page created."
     else
@@ -65,7 +65,7 @@ class SubpagesController < ApplicationController
     @wiki = Wiki.find(params[:wiki_id])
     @page = Wiki.pages.find(params[:page_id])
     @subpage = Subpage.find(params[:id])
-    authorize @wiki
+    authorize @subpage
   end
 
   def subpage_params

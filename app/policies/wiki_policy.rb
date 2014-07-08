@@ -9,7 +9,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def create?
-    wikipolicy_params
+    user.present?
   end
 
   def update?

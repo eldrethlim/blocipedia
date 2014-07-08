@@ -4,11 +4,11 @@
 
 <p> Enter your new wiki details </p>
 
-<%= form_for [@wiki do |f|] %>
-  <% if wiki.errors.any? %>
+<%= form_for [@wiki] do |f| %>
+  <% if @wiki.errors.any? %>
     <div class="alert alert-danger">
       <ul>
-        <% wiki.errors.full_messages each do |msg| %>
+        <% @wiki.errors.full_messages each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>
@@ -22,11 +22,11 @@
 
   <div class="checkbox">
     <%= f.label "Public wiki", class: 'checkbox' do %>
-      <%= f.check_box :public %> Private Wiki
+      <%= f.check_box :public %> Public Wiki
     <% end %>
   </div>
 
   <div class="form-group">
-    <%= f.submit "Create new wiki", class 'btn btn-success' %>
+    <%= f.submit "Create new wiki", class: 'btn btn-success' %>
   </div>
 <% end %>
