@@ -1,2 +1,5 @@
-<h1>Subpages#edit</h1>
-<p>Find me in app/views/subpages/edit.html.erb</p>
+<!-- app/views/subpages/edit.html.erb -->
+
+<h1> Edit sub-page </h1>
+
+<%= render partial: 'form', locals: { wiki: @wiki, page: @page subpage: @subpage} %>

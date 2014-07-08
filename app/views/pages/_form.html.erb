@@ -1,11 +1,11 @@
 <!-- app/views/pages/_form.html.erb -->
 
 <%=form_for [wiki, page] do |f| %>
-
+  <% if page.errors.any? %>
     <div class="alert alert-danger">
-      <h4> There are <%= pluralize(post.errors.count, "error") %>.</h4>
+      <h4> There are <%= pluralize(page.errors.count, "error") %>.</h4>
       <ul>
-        <% post.errors.full_messages.each do |msg| %>
+        <% page.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>
@@ -14,20 +14,20 @@
 
   <div class="form-group">
     <%= f.label "Page Name" %>
-    <%= f.text_field :title, class: 'form-control', placeholder: "Enter page name" %>
+    <%= f.text_field :name, class: 'form-control', placeholder: "Enter page name" %>
   </div>
 
   <div class="form-group epiceditor">
     <%= f.label "Page Contents" %>
-    <%= f.text_area :body, class: 'form-control my-edit-area' %>
+    <%= f.text_area :body, class: 'form-control textarea' %>
   </div>
   <script src="js/epiceditor.js"></script>
   <script>
     var opts = {
       container: 'epiceditor',
-      textarea: 'my-edit-area',
+      textarea: 'textarea',
       basePath: 'epiceditor',
-      clientSideStorage: false,
+      clientSideStorage: true,
       localStorageName: 'epiceditor',
       useNativeFullscreen: true,
       parser: marked,
@@ -38,13 +38,13 @@
       },
       theme: {
         base: 'assets/stylesheets/base/epiceditor.css',
-        preview: 'assets/stylesheets/bootstrap.css',
+        preview: 'assets/stylesheets/github.css',
         editor: 'assets/stylesheets/epic-dark.css'
       },
       button: {
         preview: true,
         fullscreen: true,
-         bar: "true"
+         bar: "auto"
       },
       focusOnLoad: false,
       shortcut: {

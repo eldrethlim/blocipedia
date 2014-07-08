@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   
-  enum role: [:free, :premium, :moderator, :admin, :banned]
+  enum role: [:free, :premium, :admin, :banned]
   after_initialize :set_default_role, :if => :new_record?
 
   mount_uploader :profilepic, ProfilepicUploader

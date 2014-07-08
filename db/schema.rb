@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20140706061734) do
 
   create_table "pages", force: true do |t|
-    t.string   "title"
+    t.string   "name"
     t.integer  "wiki_id"
     t.text     "body"
     t.datetime "created_at"
@@ -69,8 +69,6 @@ ActiveRecord::Schema.define(version: 20140706061734) do
     t.datetime "updated_at"
     t.string   "profilepic"
     t.integer  "role"
-    t.integer  "plan_id"
-    t.string   "stripe_customer_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
@@ -80,7 +78,7 @@ ActiveRecord::Schema.define(version: 20140706061734) do
   create_table "wikis", force: true do |t|
     t.string   "name"
     t.boolean  "public"
-    t.text     "description"
+    t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"

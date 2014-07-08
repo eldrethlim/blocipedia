@@ -5,12 +5,12 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:user_id])
     authorize @wiki
   end
-  
+
   def new
     @wiki = Wiki.new
     authorize @wiki
   end
-
+  
   def create
     @wiki = Wiki.new(wiki_params)
     authorize @wiki
@@ -47,6 +47,6 @@ class WikisController < ApplicationController
   private
 
   def wiki_params
-    params.require(:wiki).permit(:name, :description, :public)
-
+    params.require(:wiki).permit(:name, :description, :private)
+  end
 end

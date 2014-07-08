@@ -3,16 +3,16 @@ class PagesController < ApplicationController
   def new
     @wiki = Wiki.find(params[:wiki_id])
     @page = Page.new
-    authorize @page
+    authorize @wiki
   end
 
   def create
-    @wiki = Wiki.new(params[:wiki_id])
+    @wiki = Wiki.find(params[:wiki_id])
     @page = current_user.pages.build(page_params)
     @page.wiki = @wiki
 
 
-    authorize @page
+    authorize @wiki
     if @page.save
       redirect_to @page, notice: "Page created."
     else
@@ -30,13 +30,13 @@ class PagesController < ApplicationController
   def edit
     @wiki = Wiki.find(params[:wiki_id])
     @page = Page.find(params[:id])
-    authorize @page
+    authorize @wiki
   end
 
   def update
-    @wiki = Wiki.find(params[:iwiki_d])
+    @wiki = Wiki.find(params[:wiki_d])
     @page = Page.find(params[:id])
-    authorize @page
+    authorize @wiki
     if @page.update_attributes(page_params)
       flash[:notice] = "Your page was updated."
       redirect_to [@wiki, @page]
@@ -51,7 +51,7 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
 
     title = @page.title
-    authorize @page
+    authorize @wiki
     if @page.destroy
       flash[:notice] = "\"#{title}\" was deleted."
       redirect_to @wiki
@@ -63,7 +63,13 @@ class PagesController < ApplicationController
 
   private
 
+  def page_var
+    @wiki = Wiki.find(params[:wiki_id])
+    @page = Page.find(params[:id])
+    authorize @wiki
+  end
+
   def page_params
-    params.require(:page).permit(:title, :body)
+    params.require(:page).permit(:title, :body, :wiki_id)
   end
 end

@@ -3,7 +3,7 @@ class CreateWikis < ActiveRecord::Migration
     create_table :wikis do |t|
       t.string :name
       t.boolean :public
-      t.text :description
+      t.text :body
 
       t.timestamps
     end

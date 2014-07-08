@@ -1,5 +1,32 @@
-<!-- app/views/wikis/new.html.erb -->
+<!-- app/views/pages/new.html.erb -->
 
 <h1> Create a new Wiki </h1>
 
-<%= render partial: 'form', locals: { wiki: @wiki } %>
+<p> Enter your new wiki details </p>
+
+<%= form_for [@wiki do |f|] %>
+  <% if wiki.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% wiki.errors.full_messages each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label 'Wiki Name:' %>
+    <%= f.text_field :name, class: 'form-control', placeholder: 'Enter new wiki name' %>
+  </div>
+
+  <div class="checkbox">
+    <%= f.label "Public wiki", class: 'checkbox' do %>
+      <%= f.check_box :public %> Private Wiki
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Create new wiki", class 'btn btn-success' %>
+  </div>
+<% end %>
