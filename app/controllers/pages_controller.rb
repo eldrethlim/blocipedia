@@ -33,7 +33,7 @@ class PagesController < ApplicationController
   end
 
   def update
-    @wiki = Wiki.find(params[:wiki_d])
+    @wiki = Wiki.find(params[:wiki_id])
     @page = Page.find(params[:id])
     authorize @page
     if @page.update_attributes(page_params)

@@ -4,6 +4,7 @@ class SubpagePolicy < ApplicationPolicy
   end
 
   def update?
+    create?
   end
 
   def destroy?

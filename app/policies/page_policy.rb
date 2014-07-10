@@ -5,6 +5,7 @@ class PagePolicy < ApplicationPolicy
   end
 
   def update?
+    user.present?
   end
 
   def destroy?
@@ -12,6 +13,10 @@ class PagePolicy < ApplicationPolicy
 
   def show?
     user.present?
+  end
+
+  def pageparams
+    user.present && (record.user(user) || user.role?(:admin))
   end
 
 end

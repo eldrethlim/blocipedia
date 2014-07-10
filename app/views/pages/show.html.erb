@@ -2,4 +2,9 @@
 
 <h1><%= @page.name %></h1>
 
-<%= @page.body %></h2>
+<% if policy(@page).create? %>
+  <%= link_to "Edit page", edit_wiki_page_path(@wiki, @page), class: 'btn btn-success' %>
+  <%= link_to "Create New Subpage", new_wiki_page_subpage_path(@wiki, @page, @subpage), class: 'btn btn-success' %>
+<% end %>
+
+<h2><%= markdown @page.body %></h2>

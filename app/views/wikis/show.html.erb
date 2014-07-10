@@ -7,10 +7,6 @@
   <%= link_to "Create New Page", new_wiki_page_path(@wiki), class: 'btn btn-success' %>
 <% end %>
 
-<div class="col-md-9">
-  <h2><%= markdown @wiki.body %></h2>
-</div>
-
-<div class="col-md-9">
-  <p>Latest Activity</p>
+<div class="align">
+  <%= markdown @wiki.body %>
 </div>

@@ -1,11 +1,7 @@
 class SubscriptionPolicy < ApplicationPolicy
 
   def create?
-    if record.user == user
-      false
-    else
-      true
-    end
+    user.present? && user.subscription.nil?
   end
 
   def update?
@@ -13,6 +9,6 @@ class SubscriptionPolicy < ApplicationPolicy
   end
 
   def destroy?
-    record.user == user || user.role(:admin)
+    record.user == user || user.role?(:admin)
   end
 end

@@ -2,21 +2,21 @@ class SubpagesController < ApplicationController
 
   def new
     @wiki = Wiki.find(params[:wiki_id])
-    @page = Wiki.pages.find(params[:page_id])
+    @page = Page.find(params[:page_id])
     @subpage = Subpage.new
     authorize @subpage
   end
 
   def create
     @wiki = Wiki.find(params[:wiki_id])
-    @page = Wiki.pages.find(params[:page_id])
-    @subpage.page = @page
-    @subpage = @page.subpage
+    @page = @wiki.pages.find(params[:page_id])
     @subpage = current_user.subpages.build(subpage_params)
+    @subpage.page = @page
 
     authorize @subpage
     if @subpage.save
-      redirect_to @subpage, notice: "Sub-page created."
+      @subpage.update(body: "Edit your page now")
+      redirect_to [@wiki, @page, @subpage], notice: "Sub-page created."
     else
       flash[:error] = "Error creating sub-page. Please try again."
       render :new
@@ -30,7 +30,7 @@ class SubpagesController < ApplicationController
   def edit
     subpage_var
 
-    title = @page.title
+    title = @page.name
   end
 
   def update
@@ -48,7 +48,7 @@ class SubpagesController < ApplicationController
   def destroy
     subpage_var
 
-    title = @subpage.title
+    title = @subpage.name
 
     if @subpage.destroy
       flash[:notice] = "\"#{title}\" was deleted."
@@ -63,12 +63,12 @@ class SubpagesController < ApplicationController
 
   def subpage_var
     @wiki = Wiki.find(params[:wiki_id])
-    @page = Wiki.pages.find(params[:page_id])
+    @page = @wiki.pages.find(params[:page_id])
     @subpage = Subpage.find(params[:id])
     authorize @subpage
   end
 
   def subpage_params
-    params.require(:subpage).permit { :name, :body, :page_id }
+    params.require(:subpage).permit(:name, :body, :page_id, :wiki_id)
   end
 end

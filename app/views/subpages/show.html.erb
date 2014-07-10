@@ -1,5 +1,22 @@
 <!-- app/views/subpages/show.html.erb -->
 
-<h1><%= @subpage.name %></h1>
+<h1><%= link_to @page.name, wiki_page_path(@wiki, @page) %></h1>
+<h2><%= @subpage.name %></h2>
 
-<%= @subpage.description %></h2>
+<% if @subpages %>
+<table>
+  <% @subpages.in_groups_of(4) do |row| %>
+    <tr>
+      <% row.each do |subpage| %>
+        <td><%= link_to @subpage.name, wiki_page_subpage_path(@wiki, @page, @subpage) %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+<% end %>
+
+<% if policy(@wiki).create? %>
+  <%= link_to "Edit subpage", edit_wiki_page_subpage_path(@wiki, @page, @subpage), class: 'btn btn-success' %>
+<% end %>
+
+<h2><%= markdown @subpage.body %></h2>

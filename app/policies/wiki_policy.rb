@@ -1,7 +1,7 @@
 class WikiPolicy < ApplicationPolicy
 
   def index?
-    wikipolicy_params
+    user.present? && (user.role(:admin) || record.user == user)
   end
 
   def show?
@@ -9,7 +9,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def create?
-    user.present?
+    wikipolicy_params
   end
 
   def update?
@@ -21,6 +21,6 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def wikipolicy_params
-    (user.present? && (record.user == user || user.role?(:admin)))
+    user.present? && (record.user == user || user.role?(:admin) || record.collaborators.include?(user))
   end
 end
