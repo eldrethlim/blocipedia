@@ -1,6 +1,32 @@
 <!-- app/views/page/show.html.erb -->
 
-<h1><%= @page.name %></h1>
+<h3><%= link_to @wiki.name, wiki_path %></h3>
+
+
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    <%= @page.name %> <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li>List of <%= @page.name %></li>
+    <li class="divider"></li>
+    <% @subpages.each do |button| %>
+      <li><%= link_to @subpage.name, wiki_page_subpage_path(@wiki, @page, @subpage) %></li>
+    <% end %>
+  </ul>
+</div>
+
+<% if @subpages %>
+<table class="table borderless">
+  <% @subpages.in_groups_of(4, false) do |row| %>
+    <tr>
+      <% for @subpage in row %>
+        <td><%= link_to @subpage.name, wiki_page_subpage_path(@wiki, @page, @subpage) %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+<% end %>
 
 <% if policy(@page).create? %>
   <%= link_to "Edit page", edit_wiki_page_path(@wiki, @page), class: 'btn btn-success' %>

@@ -2,7 +2,7 @@ class WikisController < ApplicationController
   
   #Control Panel
   def index
-    @wiki = Wiki.find(params[:user_id])
+    @wiki = Wiki.find(params[:search])
     authorize @wiki
   end
 
@@ -14,6 +14,7 @@ class WikisController < ApplicationController
   def create
     @wiki = current_user.wikis.build(wiki_params)
     authorize @wiki
+    @wiki.update(body: "Edit your wiki now")
     if @wiki.save
       redirect_to @wiki, notice: "Wiki created."
     else
@@ -24,7 +25,10 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
+    @page = Page.find(params[:id])
+    @subpage = Subpage.find(params[:id])
     @pages = @wiki.pages
+    @subpages = @page.subpages
     authorize @wiki
   end
 

@@ -12,6 +12,8 @@ class SubpagesController < ApplicationController
     @page = @wiki.pages.find(params[:page_id])
     @subpage = current_user.subpages.build(subpage_params)
     @subpage.page = @page
+    @subpage.wiki = @wiki
+
 
     authorize @subpage
     if @subpage.save
@@ -25,6 +27,7 @@ class SubpagesController < ApplicationController
 
   def show
     subpage_var
+    @subpages = @page.subpages
   end
 
   def edit
