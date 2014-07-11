@@ -22,11 +22,9 @@ class PagesController < ApplicationController
   end
 
   def show
-    @page = Page.find(params[:id])
     @wiki = Wiki.find(params[:wiki_id])
+    @page = Page.find(params[:id])
     authorize @page
-    @subpage = Subpage.find(params[:id])
-    @subpages = @page.subpages
   end
 
   def edit
