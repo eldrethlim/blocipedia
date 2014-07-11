@@ -23,8 +23,9 @@ class SubscriptionsController < ApplicationController
     authorize @subscription
   end
 
-  def cancel
+  def destroy
     @subscription = Subscription.find(params[:user_id])
+    authorize @subscription
   end
 
   def show
