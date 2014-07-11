@@ -25,10 +25,6 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
-    @page = Page.find(params[:id])
-    @subpage = Subpage.find(params[:id])
-    @pages = @wiki.pages
-    @subpages = @page.subpages
     authorize @wiki
   end
 
