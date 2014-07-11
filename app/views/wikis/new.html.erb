@@ -20,11 +20,14 @@
     <%= f.text_field :name, class: 'form-control', placeholder: 'Enter new wiki name' %>
   </div>
 
+
+  <% if current_user.role?(:admin || :premium) %>
   <div class="checkbox">
     <%= f.label "Public wiki", class: 'checkbox' do %>
       <%= f.check_box :public %> Public Wiki
     <% end %>
   </div>
+  <% end %>
 
   <div class="form-group">
     <%= f.submit "Create new wiki", class: 'btn btn-success' %>
