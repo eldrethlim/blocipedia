@@ -1,7 +1,7 @@
 <!-- app/views/page/show.html.erb -->
 
 <div class="spacing">
-  <% if policy(@page).create? %>
+  <% if policy(@page).edit? %>
     Wiki Controls <br>
     <%= link_to "Edit page", edit_wiki_page_path(@wiki, @page), class: 'btn btn-success' %>
     <%= link_to "Create New Subpage", new_wiki_page_subpage_path(@wiki, @page, @subpage), class: 'btn btn-success' %>
