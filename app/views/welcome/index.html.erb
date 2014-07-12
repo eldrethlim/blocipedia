@@ -1,6 +1,6 @@
 <!-- app/views/welcome/index.html.erb -->
 <% if current_user %>
-  <%= render partial: 'wikis/index', locals: {} %>
+  <%= render partial: 'wikis/index', locals: {user: @user} %>
 <% else %>
   <div class="pad0 container">
     <div id="carousel-index" class="carousel slide" data-ride="carousel">

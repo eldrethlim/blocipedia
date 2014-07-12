@@ -26,8 +26,9 @@ class SubpagesController < ApplicationController
   end
 
   def show
-    subpage_var
-    @subpages = @page.subpages
+    @wiki = Wiki.find(params[:wiki_id])
+    @page = Page.find(params[:page_id])
+    @subpage = Subpage.find(params[:id])
   end
 
   def edit

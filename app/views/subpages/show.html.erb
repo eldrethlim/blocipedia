@@ -13,7 +13,7 @@
     List of <%= @page.name %><span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu">
-    <% @subpages.each do |subpage| %>
+    <% @page.subpages.each do |subpage| %>
         <li><%= link_to subpage.name, wiki_page_subpage_path(@wiki, @page, subpage) %></li>
     <% end %>
   </ul>
@@ -24,7 +24,7 @@
 <h2><%= markdown @subpage.body %></h2>
 
 <table>
-  <% @subpages.in_groups_of(4, false) do |row| %>
+  <% @page.subpages.in_groups_of(4, false) do |row| %>
     <tr>
     <% row.each do |subpage| %>
       <td><%= link_to subpage.name, wiki_page_subpage_path(@wiki, @page, subpage) %></td>

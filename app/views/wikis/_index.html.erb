@@ -1,18 +1,29 @@
+<!-- app/views/wikis/_index.html.erb -->
+
 <h1> Welcome, <%= current_user.name %> </h1>
 
-<p>Wikis you currently manage</p>
-
-<% if @wikis %>
-  Wikis you own:
-  <table>
-    <% current_user.wikis.each do |wiki| %>
+<div class="spacing">
+  Wiki Control Panel
+</div>
 
 
-<% else %>
+<div class="spacing">
+  <% if user.wikis %>
+    <table class="table borderless spacing">
+      <td><tr>Wiki Name</tr></td>
+      <% user.wikis do |wiki| %>
+        <td>
+          <tr> <%= link_ to wiki.name, wiki_path(wiki) %> </tr>
+          <tr> Collab/Owner </tr>
+        </td>
+      <% end %>
+    </table>
+  <% else %>
   <div class="spacing">
     You don't have any wikis you're managing right now, create one now!
   </div>
   <div class="spacing">
     <%= link_to "Create new Wiki", new_wiki_path, class: 'btn btn-success' %>
   </div>
-<% end %>
+  <% end %>
+</div>
