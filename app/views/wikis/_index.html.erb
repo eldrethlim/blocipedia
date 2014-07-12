@@ -27,3 +27,19 @@
   </div>
   <% end %>
 </div>
+
+<div class="spacing">
+  <% if current_user.role?(:premium) %>
+    <p> Thanks for your support by subscribing as a premium user! <br>
+        You can view your current subscription plan here <br>
+
+        <!-- link_to "View my subscription plan", edit_subscription_path, class: 'btn btn-info' -->
+    </p>
+  <% else %>
+    <p> Support us by subscribing today as a premium user! <br>
+        Your subscription will help us keep our servers running and food on our plate!<br>
+        Thanks in anticipation!<br>
+        <%= link_to "I'd like to be a Premium user!", new_subscription_path, class: 'btn btn-info' %>
+    </p>
+  <% end %>
+</div>

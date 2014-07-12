@@ -1,15 +1,31 @@
-<% @plans.each do |plan| %>
-  <div class="align">
-    <%= plan.name %>
-    <form action="<%= subscriptions_path %>" method="POST">
-      <script
-        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-        data-name="Blocipedia Premium Subscription"
-        data-label="Subscribe"
-        data-description="<%= plan.name %>">
-      </script>
-      <%= hidden_field_tag :plan_id, plan.id %>
-    </form>
-  </div>
-<% end %>
+<table class="borderless">
+  <tr>
+    <% @plans.each do |plan| %>
+      <td align="center">
+      <p><%= plan.name %></p>
+      <form action="<%= subscriptions_path %>" method="POST">
+        <script
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-name="Blocipedia Premium Subscription"
+          data-label="Subscribe"
+          data-description="<%= plan.name %>">
+        </script>
+        <%= hidden_field_tag :plan_id, plan.id %>
+      </form>
+      </td>
+    <% end %>
+  </tr>
+  <tr>
+    <td align="center">
+      <p> Billed monthly at $10 per month <br>
+          Allows you to create private wikis
+      </p>
+    </td>
+    <td align="center">
+      </p> Billed annually at $100 per year <br>
+           Save 20%! <br>
+           Allows you to create private wikis
+      </p>
+    </td>
+</table>
