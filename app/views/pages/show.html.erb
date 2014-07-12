@@ -1,14 +1,21 @@
 <!-- app/views/page/show.html.erb -->
 
-<h3><%= link_to @wiki.name, wiki_path %></h3>
+<div class="spacing">
+  <% if policy(@page).create? %>
+    Wiki Controls <br>
+    <%= link_to "Edit page", edit_wiki_page_path(@wiki, @page), class: 'btn btn-success' %>
+    <%= link_to "Create New Subpage", new_wiki_page_subpage_path(@wiki, @page, @subpage), class: 'btn btn-success' %>
+  <% end %>
+</div>
 
+<h3><%= link_to @wiki.name, wiki_path %></h3>
 
 <div class="btn-group">
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
     <%= @page.name %> <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu">
-    <li>List of <%= @page.name %></li>
+    <li><center>List of <%= @page.name %></center></li>
     <li class="divider"></li>
     <% @page.subpages.each do |subpage| %>
       <li><%= link_to subpage.name, wiki_page_subpage_path(@wiki, @page, subpage) %></li>
@@ -16,12 +23,7 @@
   </ul>
 </div>
 
-<div class="spacing">
-  <% if policy(@page).create? %>
-    <%= link_to "Edit page", edit_wiki_page_path(@wiki, @page), class: 'btn btn-success' %>
-    <%= link_to "Create New Subpage", new_wiki_page_subpage_path(@wiki, @page, @subpage), class: 'btn btn-success' %>
-  <% end %>
-</div>
+
 
 <h2><%= markdown @page.body %></h2>
 

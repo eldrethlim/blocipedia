@@ -1,8 +1,10 @@
 <!-- app/views/pages/new.html.erb -->
 
-<h1> Create a new sub-page </h1>
+<h2> <%= link_to @page.name, wiki_page_path(@wiki, @page) %></h2>
 
-<p> Enter your new sub-page details </p>
+<h1> Create a new subpage for <%= @page.name %> </h1>
+
+<p> Enter your new subpage details </p>
 
 <%= form_for [@wiki, @page, @subpage] do |f| %>
   <% if @subpage.errors.any? %>

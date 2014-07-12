@@ -1,6 +1,8 @@
 <!-- app/views/pages/new.html.erb -->
 
-<h1> Create a new page </h1>
+<h2><%= link_to @wiki.name, wiki_path(@wiki) %></h2>
+
+<h1> Create a new page for <%= @wiki.name %> </h1>
 
 <p> Enter your new page details </p>
 

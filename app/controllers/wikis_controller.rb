@@ -1,10 +1,4 @@
 class WikisController < ApplicationController
-  
-  #Control Panel
-  def index
-    @wiki = Wiki.find(params[:search])
-    authorize @wiki
-  end
 
   def new
     @wiki = Wiki.new

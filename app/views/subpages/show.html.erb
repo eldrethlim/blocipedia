@@ -1,34 +1,34 @@
 <!-- app/views/subpages/show.html.erb -->
 
-<h3><%= link_to @wiki.name, wiki_path(@wiki) %></h1>
+<% if policy(@subpage).create? %>
+  Subpage Controls <br>
+  <%= link_to "Edit subpage", edit_wiki_page_subpage_path(@wiki, @page, @subpage), class: 'btn btn-success' %>
+<% end %>
 
-<div class="btn-group">
+<h3><%= link_to @wiki.name, wiki_path(@wiki) %></h3>
+<h1><%= link_to @page.name, wiki_page_path(@wiki, @page) %></h1>
+
+<div class="btn-group spacing">
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-    <%= link_to @page.name, wiki_page_path(@wiki, @page) %> <span class="caret"></span>
+    List of <%= @page.name %><span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu">
-    <% @subpages.each do |button| %>
-        <li><%= link_to @subpage.name, wiki_page_subpage_path(@wiki, @page, @subpage) %></li>
+    <% @subpages.each do |subpage| %>
+        <li><%= link_to subpage.name, wiki_page_subpage_path(@wiki, @page, subpage) %></li>
     <% end %>
   </ul>
 </div>
 
 <h1><%= @subpage.name %></h2>
 
-<% if policy(@subpage).create? %>
-  <%= link_to "Edit subpage", edit_wiki_page_subpage_path(@wiki, @page, @subpage), class: 'btn btn-success' %>
-<% end %>
-
 <h2><%= markdown @subpage.body %></h2>
 
-<% if @subpages %>
 <table>
   <% @subpages.in_groups_of(4, false) do |row| %>
     <tr>
-      <% for @subpage in row%>
-        <td><%= link_to @subpage.name, wiki_page_subpage_path(@wiki, @page, @subpage) %></td>
-      <% end %>
+    <% row.each do |subpage| %>
+      <td><%= link_to subpage.name, wiki_page_subpage_path(@wiki, @page, subpage) %></td>
+    <% end %>
     </tr>
   <% end %>
 </table>
-<% end %>

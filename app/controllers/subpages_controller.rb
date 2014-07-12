@@ -17,7 +17,7 @@ class SubpagesController < ApplicationController
 
     authorize @subpage
     if @subpage.save
-      @subpage.update(body: "Edit your page now")
+      @subpage.update(body: "Edit your subpage now")
       redirect_to [@wiki, @page, @subpage], notice: "Sub-page created."
     else
       flash[:error] = "Error creating sub-page. Please try again."
