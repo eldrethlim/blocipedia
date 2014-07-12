@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   def index
     if current_user
-      @user = User.find(current_user.id)
+      @user = current_user.id
     end
   end
 
