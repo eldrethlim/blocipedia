@@ -10,12 +10,12 @@
 <div class="spacing">
   <% if user.wikis %>
     <table class="table borderless spacing">
-      <td><tr>Wiki Name</tr></td>
-      <% user.wikis do |wiki| %>
-        <td>
-          <tr> <%= link_ to wiki.name, wiki_path(wiki) %> </tr>
-          <tr> Collab/Owner </tr>
-        </td>
+      Wiki Name
+      <% user.wikis.each do |wiki| %>
+        <tr>
+          <td> <%= link_to wiki.name, wiki_path(wiki) %> </td>
+          <td> Owner </td>
+        </tr>
       <% end %>
     </table>
   <% else %>
