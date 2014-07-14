@@ -17,7 +17,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def destroy?
-    wikipolicy_params
+    user.present? && (record.user == user || user.role(:admin))
   end
 
   def wikipolicy_params

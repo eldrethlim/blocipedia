@@ -1,13 +1,5 @@
 Blocipedia::Application.routes.draw do
-
-  get 'subpages/index'
-
-  get 'subpages/new'
-
-  get 'subpages/shot'
-
-  get 'subpages/edit'
-
+  
   root to: 'welcome#index'
 
   get 'about' => 'welcome#about'

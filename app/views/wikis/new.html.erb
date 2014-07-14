@@ -20,14 +20,17 @@
     <%= f.text_field :name, class: 'form-control', placeholder: 'Enter new wiki name' %>
   </div>
 
-
-  <% if current_user.role?(:premium) %>
+  <% if current_user.can_create_private_wiki? %>
     <div class="checkbox">
       <%= f.label "Public wiki", class: 'checkbox' do %>
         <%= f.check_box :public %> Public Wiki
       <% end %>
-    </div>
   <% else %>
+    <div class="checkbox" disabled="disabled" checked="checked">
+      <%= f.label "Public wiki", class: 'checkbox' do %>
+        <%= f.check_box :public, disabled: true, checked: true %> Public Wiki
+      <% end %>
+    </div>
     <div class="spacing">
       <p>
         Want to make your Wiki private? Be a premium user today!<br>

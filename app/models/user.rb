@@ -27,4 +27,7 @@ class User < ActiveRecord::Base
     role == base_role.to_s
   end
 
+  def can_create_private_wiki?
+    role?(:admin) || role?(:premium)
+  end
 end

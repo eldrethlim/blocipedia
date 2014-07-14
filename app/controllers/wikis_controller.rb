@@ -9,6 +9,12 @@ class WikisController < ApplicationController
     @wiki = current_user.wikis.build(wiki_params)
     authorize @wiki
     @wiki.update(body: "Edit your wiki now")
+
+    if current_user.can_create_private_wiki?
+    else
+      @wiki.update(public: true)
+    end
+    
     if @wiki.save
       redirect_to @wiki, notice: "Wiki created."
     else
@@ -38,9 +44,23 @@ class WikisController < ApplicationController
     end
   end
 
+  def destroy
+    @wiki = Wiki.find(params[:id])
+    name = @wiki.name
+
+    authorize @wiki
+    if @wiki.destroy
+      flash[:notice] = "\"#{name}\" was deleted successfully."
+      redirect_to root_path
+    else
+      flash[:error] = "There was a problem deleting this wiki. Please try again."
+      render :show
+    end
+  end
+
   private
 
   def wiki_params
-    params.require(:wiki).permit(:name, :body, :private)
+    params.require(:wiki).permit(:name, :body, :public)
   end
 end

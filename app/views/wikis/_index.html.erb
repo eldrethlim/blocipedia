@@ -15,10 +15,16 @@
         <tr>
           <td> <%= link_to wiki.name, wiki_path(wiki) %> </td>
           <td> Owner </td>
+          <td> <%= link_to "Delete Wiki", wiki, method: :destroy, data: {confirm: 'Are you sure you want to delete this Wiki?'} %>
         </tr>
       <% end %>
     </table>
+
+    <div class="spacing">
+      <%= link_to "Create new Wiki", new_wiki_path, class: 'btn btn-success' %>
+    </div>
   <% else %>
+
   <div class="spacing">
     You don't have any wikis you're managing right now, create one now!
   </div>
