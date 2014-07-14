@@ -1,4 +1,6 @@
 <!-- app/views/welcome/index.html.erb -->
+
+<!-- This is the renderer for it -->
 <% if current_user %>
   <%= render partial: 'wikis/index', locals: {user: current_user} %>
 <% else %>
