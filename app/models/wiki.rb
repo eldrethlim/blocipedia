@@ -1,6 +1,6 @@
 class Wiki < ActiveRecord::Base
-  has_many :pages
-  has_many :subpages
+  has_many :pages, dependent: :destroy
+  has_many :subpages, dependent: :destroy
   belongs_to :user
   has_many :collaborations
   has_many :collaborators, class_name: "User", source: :user, through: :collaborations
