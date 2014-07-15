@@ -8,13 +8,6 @@ class WikisController < ApplicationController
   def create
     @wiki = current_user.wikis.build(wiki_params)
     authorize @wiki
-    @wiki.update(body: "Edit your wiki now")
-
-    if current_user.can_create_private_wiki?
-    else
-      @wiki.update(public: true)
-    end
-    
     if @wiki.save
       redirect_to @wiki, notice: "Wiki created."
     else

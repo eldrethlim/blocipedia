@@ -23,10 +23,11 @@
   </ul>
 </div>
 
+<p><%= markdown @page.body %></p>
 
-
-<h2><%= markdown @page.body %></h2>
-
+<div class="spacing">
+  Subpages under <%= @page.name %>
+</div>
 <table class="table borderless">
   <% @page.subpages.in_groups_of(4, false) do |row| %>
     <tr>

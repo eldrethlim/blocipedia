@@ -21,7 +21,7 @@
 
 <h1><%= @subpage.name %></h2>
 
-<h2><%= markdown @subpage.body %></h2>
+<p><%= markdown @subpage.body %></p>
 
 <table>
   <% @page.subpages.in_groups_of(4, false) do |row| %>

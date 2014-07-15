@@ -8,6 +8,7 @@ class Wiki < ActiveRecord::Base
   validates_presence_of :name
   before_create :check_default_privacy
   before_create :set_default_privacy
+  after_create :set_wiki_default_body
   
   private
 
@@ -21,5 +22,9 @@ class Wiki < ActiveRecord::Base
     if self.public.nil?
       self.public = true
     end
+  end
+
+  def set_wiki_default_body
+    self.update(body: "Edit your wiki now")
   end
 end

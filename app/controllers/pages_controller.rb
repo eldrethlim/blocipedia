@@ -13,7 +13,6 @@ class PagesController < ApplicationController
 
     authorize @page
     if @page.save
-      @page.update(body: "Edit your page now")
       redirect_to [@wiki, @page], notice: "Page created."
     else
       flash[:error] = "Error creating page. Please try again."

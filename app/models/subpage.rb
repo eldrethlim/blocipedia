@@ -4,4 +4,11 @@ class Subpage < ActiveRecord::Base
   belongs_to :wiki
 
   validates_presence_of :name
+  after_create :set_subpage_default_body
+
+  private
+
+  def set_subpage_default_body
+    self.update(body: "Edit your subpage now")
+  end
 end
