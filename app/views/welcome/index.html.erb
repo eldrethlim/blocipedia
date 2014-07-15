@@ -4,7 +4,7 @@
 <% if current_user %>
   <%= render partial: 'wikis/index', locals: {user: current_user} %>
 <% else %>
-  <div class="pad0 container">
+  <div class="pad0">
     <div id="carousel-index" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carousel-index" data-slide-to="0" class="active"></li>
