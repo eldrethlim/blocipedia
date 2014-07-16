@@ -12,10 +12,6 @@ class ApplicationController < ActionController::Base
     session[:previous_url] = request.fullpath unless request.fullpath =~ (/\/users/ || /\/subscriptions/)
   end
 
-  rescue_from Pundit::NotAuthorizedError do |exception|
-    redirect_to session[:previousl_url] || root_path, alert: exception.message
-  end
-
   protected
 
   def configure_permitted_parameters
