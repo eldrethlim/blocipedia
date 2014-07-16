@@ -1,7 +1,7 @@
 class Page < ActiveRecord::Base
   belongs_to :user
   belongs_to :wiki
-  has_many :subpages
+  has_many :subpages , dependent: :destroy
 
   validates_presence_of :name
   after_create :set_page_default_body
