@@ -57,6 +57,10 @@
       </div>
 
       <div class="spacing form-group">
+        <%= f.label :state %>
+        <%= f.text_field :state, class: 'form-control' %>
+
+      <div class="spacing form-group">
         <%= f.label :country, "Country:" %>
         <%= f.country_select :country %>
       </div>
