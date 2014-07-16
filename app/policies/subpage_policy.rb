@@ -1,6 +1,7 @@
 class SubpagePolicy < ApplicationPolicy
-    def create?
-    user.present?
+    
+  def create?
+    check_subpage_owner_collab_or_admin
   end
 
   def update?
@@ -8,9 +9,16 @@ class SubpagePolicy < ApplicationPolicy
   end
 
   def destroy?
+    check_subpage_owner_collab_or_admin
   end
 
   def show?
-    user.present?
+    record.wiki.public? || check_subpage_owner_collab_or_admin
+  end
+
+  private
+
+  def check_subpage_owner_collab_or_admin
+    user.present? && (record.user == user || user.role?(:admin) || record.wiki.collaborators.include?(user))
   end
 end

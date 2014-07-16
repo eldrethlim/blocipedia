@@ -5,14 +5,14 @@ class SubscriptionPolicy < ApplicationPolicy
   end
 
   def update?
-    subscription_params
+    check_user_and_role
   end
 
   def destroy?
-    subscription_params
+    check_user_and_role
   end
 
-  def subscription_params
+  def check_user_and_role
     user.present? && (record.user == user || user.role(:admin))
   end
 end

@@ -1,15 +1,11 @@
 class WikiPolicy < ApplicationPolicy
 
-  def index?
-    user.present? && (user.role(:admin) || record.user == user)
-  end
-
   def show?
-    record.public? || wikipolicy_params
+    record.public? || check_wiki_owner_collab_or_admin
   end
 
   def create?
-    user.present?
+    check_wiki_owner_collab_or_admin
   end
 
   def update?
@@ -17,10 +13,10 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.present? && (record.user == user || user.role(:admin))
+    check_wiki_owner_collab_or_admin
   end
 
-  def wikipolicy_params
+  def check_wiki_owner_collab_or_admin
     user.present? && (record.user == user || user.role?(:admin) || record.collaborators.include?(user))
   end
 end

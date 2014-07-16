@@ -1,22 +1,24 @@
 class PagePolicy < ApplicationPolicy
   
   def create?
-    user.present?
+    check_page_owner_collab_or_admin
   end
 
   def update?
-    user.present?
+    create?
   end
 
   def destroy?
+    check_page_owner_collab_or_admin
   end
 
   def show?
-    user.present?
+    record.wiki.public? || check_page_owner_collab_or_admin
   end
 
-  def pageparams
-    user.present && (record.user(user) || user.role?(:admin))
-  end
+  private
 
+  def check_page_owner_collab_or_admin
+    user.present? && (record.user == user || user.role?(:admin) || record.wiki.collaborators.include?(user))
+  end
 end
