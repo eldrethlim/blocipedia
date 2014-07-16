@@ -2,9 +2,7 @@
 @import 'epiceditor';  
 @import 'bartik';  
 @import 'github';  
-@import 'preview-dark';  
-@import 'epic-dark';  
-@import 'epic-light';  
+@import 'preview-dark';
 
 div.pad0
 {
@@ -71,4 +69,8 @@ div.showspacing {
 
 .borderless td {
     border: none;
+}
+
+body {
+  font-size: 16px;
 }

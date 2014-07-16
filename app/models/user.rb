@@ -30,4 +30,8 @@ class User < ActiveRecord::Base
   def can_create_private_wiki?
     role?(:admin) || role?(:premium)
   end
+
+  def self.search(query)
+    where("email like ?", "%#{query}")
+  end
 end
