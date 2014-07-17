@@ -1,7 +1,0 @@
-Add/Remove Collaborators for <%= @wiki.name %>
-
-<%= form_tag(wikis_path, :method => "get", id: "search-form") do %>
-  <%= label_tag(:search, "Search for:") %>
-  <%= text_field_tag :search, params[:search], placeholder: "Enter email to search for a user" %>
-  <%= submit_tag "Search", :email => nil %>
-<% end %>
