@@ -1,15 +1,23 @@
 class SubscriptionPolicy < ApplicationPolicy
 
+  def new?
+    user.present? && user.subscribed?
+  end
+
   def create?
-    user.present? && user.subscription.nil?
+    user.present?
   end
 
   def update?
-    check_user_and_role
+    user.present?
   end
 
   def destroy?
-    check_user_and_role
+    user.present?
+  end
+
+  def show?
+    user.present?
   end
 
   def check_user_and_role

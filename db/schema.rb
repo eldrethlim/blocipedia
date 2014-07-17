@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140709234935) do
+ActiveRecord::Schema.define(version: 20140717074851) do
 
   create_table "collaborations", force: true do |t|
     t.integer "wiki_id"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20140709234935) do
     t.datetime "updated_at"
     t.string   "profilepic"
     t.integer  "role"
+    t.boolean  "subscribed"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

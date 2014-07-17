@@ -35,7 +35,7 @@
 </div>
 
 <div class="spacing">
-  <% if current_user.role?(:premium) %>
+  <% if current_user.subscribed? %>
     <p> Thanks for your support by subscribing as a premium user! <br>
         You can view your current subscription plan here <br>
 

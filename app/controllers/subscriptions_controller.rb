@@ -19,19 +19,18 @@ class SubscriptionsController < ApplicationController
   end
 
   def edit
-    @subscription = Subscription.find(params[:user_id])
+    @subscription = Subscription.find(params[:id])
     authorize @subscription
   end
 
   def destroy
-    @subscription = Subscription.find(params[:user_id])
+    @subscription = Subscription.find(params[:id])
     authorize @subscription
   end
 
   def show
-    @subscription = Subscription.find(params[:user_id])
-    @plan = Plan.find(params[:plan_id])
-    name = @plan.name
+    @subscription = Subscription.find(params[:id])
+    @plan = @subscription.plan
 
     authorize @subscription
   end

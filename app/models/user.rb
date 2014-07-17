@@ -14,13 +14,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   
-  enum role: [:free, :premium, :admin, :banned]
+  enum role: [:banned, :user, :admin]
   after_initialize :set_default_role, :if => :new_record?
 
   mount_uploader :profilepic, ProfilepicUploader
 
   def set_default_role
-    self.role ||= :free
+    self.role ||= :user
   end
 
   def role?(base_role)
@@ -28,10 +28,6 @@ class User < ActiveRecord::Base
   end
 
   def can_create_private_wiki?
-    role?(:admin) || role?(:premium)
-  end
-
-  def self.search(query)
-    where("email like ?", "%#{query}")
+    self.subscribed? || role?(:admin)
   end
 end

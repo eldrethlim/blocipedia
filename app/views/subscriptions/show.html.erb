@@ -1,9 +1,9 @@
-<% if @subscription.plan.present? %>
+<% if @subscription.user.present? %>
 
   <h1> You're subscribed! </h1>
-  <p> You are currently subsribed to our <%= "#{name}" %> </p>
+  <p> You are currently subscribed to our <%= @subscription.plan.name %> </p>
 
-  <%= link to 'Edit subscription options', edit_subscription_path, class: 'btn' %>
+  <%= link_to 'Edit subscription options', edit_subscription_path, class: 'btn' %>
 
 <% else %>
 
@@ -15,5 +15,5 @@
 
 <h2> Payment Information </h2>
 
-<p> The last 4 digits of the card you are using to pay for this subscription is <%= @subscription.last_four %></p>
+<p> The last 4 digits of the card you are using to pay for this subscription is "last four"</p>
 <%= link_to "Update payment information", edit_subscription_path, class: 'btn' %>
