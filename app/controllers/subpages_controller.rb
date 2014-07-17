@@ -1,15 +1,15 @@
 class SubpagesController < ApplicationController
 
   def new
-    @wiki = Wiki.find(params[:wiki_id])
-    @page = Page.find(params[:page_id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+    @page = Page.friendly.find(params[:page_id])
     @subpage = Subpage.new
     authorize @subpage
   end
 
   def create
-    @wiki = Wiki.find(params[:wiki_id])
-    @page = @wiki.pages.find(params[:page_id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+    @page = @wiki.pages.friendly.find(params[:page_id])
     @subpage = current_user.subpages.build(subpage_params)
     @subpage.page = @page
     @subpage.wiki = @wiki
@@ -25,9 +25,9 @@ class SubpagesController < ApplicationController
   end
 
   def show
-    @wiki = Wiki.find(params[:wiki_id])
-    @page = Page.find(params[:page_id])
-    @subpage = Subpage.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+    @page = Page.friendly.find(params[:page_id])
+    @subpage = Subpage.friendly.find(params[:id])
   end
 
   def edit
@@ -65,9 +65,9 @@ class SubpagesController < ApplicationController
   private
 
   def subpage_var
-    @wiki = Wiki.find(params[:wiki_id])
-    @page = @wiki.pages.find(params[:page_id])
-    @subpage = Subpage.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+    @page = @wiki.pages.friendly.find(params[:page_id])
+    @subpage = Subpage.friendly.find(params[:id])
     authorize @subpage
   end
 

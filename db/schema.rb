@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140717074851) do
+ActiveRecord::Schema.define(version: 20140717172425) do
 
   create_table "collaborations", force: true do |t|
     t.integer "wiki_id"
@@ -25,7 +25,10 @@ ActiveRecord::Schema.define(version: 20140717074851) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "slug"
   end
+
+  add_index "pages", ["slug"], name: "index_pages_on_slug", unique: true
 
   create_table "plans", force: true do |t|
     t.string  "stripe_id"
@@ -42,12 +45,16 @@ ActiveRecord::Schema.define(version: 20140717074851) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "wiki_id"
+    t.string   "slug"
   end
+
+  add_index "subpages", ["slug"], name: "index_subpages_on_slug", unique: true
 
   create_table "subscriptions", force: true do |t|
     t.integer "plan_id"
     t.integer "user_id"
     t.string  "stripe_customer_id"
+    t.string  "stripe_subscription_id"
   end
 
   create_table "users", force: true do |t|
@@ -76,10 +83,12 @@ ActiveRecord::Schema.define(version: 20140717074851) do
     t.string   "profilepic"
     t.integer  "role"
     t.boolean  "subscribed"
+    t.string   "slug"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["slug"], name: "index_users_on_slug", unique: true
   add_index "users", ["username"], name: "index_users_on_username", unique: true
 
   create_table "wikis", force: true do |t|
@@ -89,6 +98,9 @@ ActiveRecord::Schema.define(version: 20140717074851) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "slug"
   end
+
+  add_index "wikis", ["slug"], name: "index_wikis_on_slug", unique: true
 
 end

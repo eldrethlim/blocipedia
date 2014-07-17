@@ -1,13 +1,13 @@
 class PagesController < ApplicationController
 
   def new
-    @wiki = Wiki.find(params[:wiki_id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
     @page = Page.new
     authorize @page
   end
 
   def create
-    @wiki = Wiki.find(params[:wiki_id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
     @page = current_user.pages.build(page_params)
     @page.wiki = @wiki
 
@@ -21,20 +21,20 @@ class PagesController < ApplicationController
   end
 
   def show
-    @wiki = Wiki.find(params[:wiki_id])
-    @page = Page.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+    @page = Page.friendly.find(params[:id])
     authorize @page
   end
 
   def edit
-    @wiki = Wiki.find(params[:wiki_id])
-    @page = Page.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+    @page = Page.friendly.find(params[:id])
     authorize @page
   end
 
   def update
-    @wiki = Wiki.find(params[:wiki_id])
-    @page = Page.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+    @page = Page.friendly.find(params[:id])
     authorize @page
     if @page.update_attributes(page_params)
       flash[:notice] = "Your page was updated."
@@ -46,8 +46,8 @@ class PagesController < ApplicationController
   end
 
   def destroy
-    @wiki = Wiki.find(params[:wiki_id])
-    @page = Page.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+    @page = Page.friendly.find(params[:id])
 
     title = @page.title
     authorize @page
@@ -63,8 +63,8 @@ class PagesController < ApplicationController
   private
 
   def page_var
-    @wiki = Wiki.find(params[:wiki_id])
-    @page = Page.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:wiki_id])
+    @page = Page.friendly.find(params[:id])
     authorize @page
   end
 

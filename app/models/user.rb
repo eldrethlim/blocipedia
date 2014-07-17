@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-
+  extend FriendlyId
+  friendly_id :username, use: :slugged
   has_many :collaborations
   has_many :collab_wikis, class_name: "Wiki", source: :wiki, through: :collaborations
   has_many :wikis

@@ -1,4 +1,6 @@
 class Wiki < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: :slugged
   has_many :pages, dependent: :destroy
   has_many :subpages, dependent: :destroy
   belongs_to :user
@@ -10,7 +12,7 @@ class Wiki < ActiveRecord::Base
   before_create :set_default_privacy
   after_create :set_wiki_default_body
   
-  private
+  private 
 
   def check_default_privacy
     if !self.user.can_create_private_wiki?
