@@ -31,7 +31,7 @@
             <% if current_user %>
               <%= image_tag(current_user.profilepic.small.url) if current_user.profilepic? %>
               Welcome back <%= link_to (current_user.name), current_user %>!
-              <%= link_to edit_user_registration_path, class: 'btn btn-primary btn-sm' do %>
+              <%= link_to current_user, class: 'btn btn-primary btn-sm' do %>
                 <span class="glyphicon glyphicon-user"></span>
               <% end %>
 

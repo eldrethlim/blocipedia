@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="col-md-8">
-    <h3>User details</h3>
+    <h3><u>User details</u></h3>
 
     <div class="showspacing">
       <b>Profile Image</b><br>
@@ -12,33 +12,37 @@
     </div>
 
     <div class="showspacing font">
-      <b>Name:</b> <%= current_user.name %>
+      <b>Name:</b> <%= @user.name %>
     </div>
 
     <div class="showspacing font">
-      <b>E-mail:</b> <%= current_user.email %>
+      <b>E-mail:</b> <%= @user.email %>
     </div>
 
     <div class="showspacing font">
-      <b>Address:</b> <%= current_user.address %>
+      <b>Address:</b> <%= @user.address %>
     </div>
 
     <div class="showspacing font">
-      <b>Postcode:</b> <%= current_user.postcode %>
+      <b>Postcode:</b> <%= @user.postcode %>
     </div>
 
     <div class="showspacing font">
-      <b>State:</b> <%= current_user.state %>
+      <b>State:</b> <%= @user.state %>
     </div>
 
     <div class="showspacing font">
-      <b>Country:</b> <%= current_user.country %>
+      <b>Country:</b> <%= @user.country %>
     </div>
 
     <div class="showspacing">
       <%= link_to edit_user_registration_path, class: 'btn btn-success' do %>
         Edit User
         <% end %>
+    </div>
+
+    <div class="superspacing">
+      <%= render partial: 'subscriptions/show', locals: {subscription: @subscription} %>
     </div>
    
   </div>

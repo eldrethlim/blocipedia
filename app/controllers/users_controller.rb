@@ -3,6 +3,11 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
 
+  def show
+    @user = User.friendly.find(params[:id])
+    @subscription = @user.subscription
+  end
+
   def update
     if current_user.update_attributes(user_params)
       flash[:notice] = "Personal information updated"
