@@ -13,7 +13,7 @@ class Subscription < ActiveRecord::Base
 
       self.user = User.find_by_email(email)
       self.stripe_customer_id = customer.id
-      current_user.subscribed = true
+      current_user.update_attribute(:subscribed, true)
       save!
     end
     

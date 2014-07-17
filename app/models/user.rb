@@ -15,12 +15,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   
   enum role: [:banned, :user, :admin]
-  after_initialize :set_default_role, :if => :new_record?
+  after_initialize :set_default_role_and_subscription, :if => :new_record?
 
   mount_uploader :profilepic, ProfilepicUploader
 
-  def set_default_role
+  def set_default_role_and_subscription
     self.role ||= :user
+    self.subscribed ||= false
   end
 
   def role?(base_role)
