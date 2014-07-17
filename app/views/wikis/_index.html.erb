@@ -35,13 +35,7 @@
 </div>
 
 <div class="spacing">
-  <% if current_user.subscribed? %>
-    <p> Thanks for your support by subscribing as a premium user! <br>
-        You can view your current subscription plan here <br>
-
-        <!-- link_to "View my subscription plan", edit_subscription_path, class: 'btn btn-info' -->
-    </p>
-  <% else %>
+  <% if !current_user.subscribed? %>
     <p> Support us by subscribing today as a premium user! <br>
         Your subscription will help us keep our servers running and food on our plate!<br>
         Thanks in anticipation!<br>

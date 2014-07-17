@@ -27,11 +27,4 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.find(params[:id])
     authorize @subscription
   end
-
-  def show
-    @subscription = Subscription.find(params[:id])
-    @plan = @subscription.plan
-
-    authorize @subscription
-  end
 end
