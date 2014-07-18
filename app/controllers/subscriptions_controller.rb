@@ -3,7 +3,9 @@ class SubscriptionsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :create
 
   def new
+    @subscription = Subscription.new
     @plans = Plan.all
+    authorize @subscription
   end
 
   def create
@@ -11,7 +13,7 @@ class SubscriptionsController < ApplicationController
     authorize @subscription
 
     if @subscription.save_with_payment(params[:stripeToken], params[:stripeEmail])
-      redirect_to @subscription, :notice => "Thank you for subscribing as a premium user!"
+      redirect_to current_user, :notice => "Thank you for subscribing as a premium user!"
     else
       flash[:error] = "You are already subscribed as a premium user."
       render :show

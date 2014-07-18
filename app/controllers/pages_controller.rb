@@ -2,7 +2,7 @@ class PagesController < ApplicationController
 
   def new
     @wiki = Wiki.friendly.find(params[:wiki_id])
-    @page = Page.new
+    @page = @wiki.pages.build
     authorize @page
   end
 

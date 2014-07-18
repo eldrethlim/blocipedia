@@ -5,11 +5,11 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def create?
-    check_wiki_owner_collab_or_admin
+    user.present?
   end
 
   def update?
-    create?
+    check_wiki_owner_collab_or_admin
   end
 
   def destroy?

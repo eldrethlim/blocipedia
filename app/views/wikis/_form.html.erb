@@ -32,6 +32,7 @@
 
     <p>Add Collaborators to <%= wiki.name %> Wiki (showing all users)</p>
 
+      <%= form_tag '/wikis' do %>
     <table class="table spacing">
 
       <tr>
@@ -40,14 +41,19 @@
         <td><b>Give Access</b></td>
       </tr>
 
+
       <% user.each do |user| %>
         <tr>
           <td> <%= user.name %></td>
           <td> <%= user.email %></td>
           <td> 
             <div class="checkbox">
+              <%= check_box_tag 'user_id[]', user.id %> 
             </div>
           </td>
         </tr>
       <% end %>
-    </table>
+
+    </table>    
+     <%= submit_tag 'Share' %>
+  <% end %>

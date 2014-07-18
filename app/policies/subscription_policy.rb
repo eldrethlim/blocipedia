@@ -1,11 +1,11 @@
 class SubscriptionPolicy < ApplicationPolicy
 
   def new?
-    user.present? && user.subscribed?
+    user.present? && (user.subscribed == false)
   end
 
   def create?
-    user.present?
+    new?
   end
 
   def update?
