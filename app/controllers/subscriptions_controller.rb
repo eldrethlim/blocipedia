@@ -20,13 +20,24 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-  def edit
-    @subscription = Subscription.find(params[:id])
-    authorize @subscription
+  def edit_payment_details
+    @subscription = current_user.subscription
   end
 
-  def destroy
-    @subscription = Subscription.find(params[:id])
-    authorize @subscription
+  def update_payment_details
+    @subscription = current_user.subscription
+    card_info = {
+      number:    params[:number],
+      exp_month: params[:date][:month],
+      exp_year:  params[:date][:year],
+      cvc:       params[:cvc]
+    }
+
+    if @subscription.update_card(@subscription, card_info)
+      redirect_to current_user, :notice => "Your payment details have been updated"
+    else
+      flash[:error] = "There was a problem updating your payment details."
+      render :show
+    end
   end
 end
