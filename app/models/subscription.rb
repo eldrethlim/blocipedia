@@ -43,7 +43,6 @@ class Subscription < ActiveRecord::Base
       customer = Stripe::Customer.retrieve(self.stripe_customer_id)
       customer.card = token.id
       customer.save
-      require 'pry'; binding.pry
 
       card_id = customer.default_card #card the customer used to pay
       cards = customer.cards.data # array of cards
