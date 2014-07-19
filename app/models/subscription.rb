@@ -29,7 +29,7 @@ class Subscription < ActiveRecord::Base
     false
   end
 
-  def update_card(subscriber, card_info)
+  def update_card(subscription, card_info)
     if valid?
       token = Stripe::Token.create(
         card: {
@@ -41,11 +41,16 @@ class Subscription < ActiveRecord::Base
       )
 
       customer = Stripe::Customer.retrieve(self.stripe_customer_id)
-      card = customer.cards.create(card: token)
-      card.save
-      customer.default_card = card.id
+      customer.card = token.id
       customer.save
       require 'pry'; binding.pry
+
+      card_id = customer.default_card #card the customer used to pay
+      cards = customer.cards.data # array of cards
+
+      self.last4 = cards.find { |card| card.id == card_id }.last4
+      self.cardname = cards.find { |card| card.id == card_id }.brand
+      save!
     end
 
       rescue Stripe::InvalidRequestError => e
