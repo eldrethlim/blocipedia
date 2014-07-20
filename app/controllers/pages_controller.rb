@@ -22,13 +22,13 @@ class PagesController < ApplicationController
 
   def show
     @wiki = Wiki.friendly.find(params[:wiki_id])
-    @page = Page.friendly.find(params[:id])
+    @page = @wiki.pages.friendly.find(params[:id])
     authorize @page
   end
 
   def edit
     @wiki = Wiki.friendly.find(params[:wiki_id])
-    @page = Page.friendly.find(params[:id])
+    @page = @wiki.pages.friendly.find(params[:id])
     authorize @page
   end
 
@@ -47,7 +47,7 @@ class PagesController < ApplicationController
 
   def destroy
     @wiki = Wiki.friendly.find(params[:wiki_id])
-    @page = Page.friendly.find(params[:id])
+    @page = @wiki.pages.friendly.find(params[:id])
 
     title = @page.title
     authorize @page
@@ -64,7 +64,7 @@ class PagesController < ApplicationController
 
   def page_var
     @wiki = Wiki.friendly.find(params[:wiki_id])
-    @page = Page.friendly.find(params[:id])
+    @page = @wiki.pages.friendly.find(params[:id])
     authorize @page
   end
 

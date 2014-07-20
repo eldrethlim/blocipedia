@@ -19,6 +19,6 @@ class SubpagePolicy < ApplicationPolicy
   private
 
   def check_subpage_owner_collab_or_admin
-    user.present? && (record.user == user || user.role?(:admin) || record.wiki.collaborators.include?(user))
+    user.present? && (record.wiki.user == user || user.role?(:admin) || record.wiki.collaborators.include?(user))
   end
 end

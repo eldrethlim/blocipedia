@@ -2,8 +2,8 @@ class SubpagesController < ApplicationController
 
   def new
     @wiki = Wiki.friendly.find(params[:wiki_id])
-    @page = Page.friendly.find(params[:page_id])
-    @subpage = Subpage.new
+    @page = @wiki.pages.friendly.find(params[:page_id])
+    @subpage = @page.subpages.build
     authorize @subpage
   end
 
@@ -13,7 +13,6 @@ class SubpagesController < ApplicationController
     @subpage = current_user.subpages.build(subpage_params)
     @subpage.page = @page
     @subpage.wiki = @wiki
-
 
     authorize @subpage
     if @subpage.save

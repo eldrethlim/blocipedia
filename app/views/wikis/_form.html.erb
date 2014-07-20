@@ -49,6 +49,7 @@
             <td> 
               <div class="checkbox">
                 <%= check_box_tag 'user_id[]', user.id %> 
+                <% hidden_field_tag wiki, wiki.id %>
               </div>
             </td>
           </tr>
