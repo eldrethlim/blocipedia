@@ -80,6 +80,7 @@ class Subscription < ActiveRecord::Base
       if cancel = true
       customer = Stripe::Customer.retrieve(self.stripe_customer_id)
       subscription = customer.subscriptions.retrieve(self.stripe_subscription_id).delete(:at_period_end => true)
+      end
     end
 
     stripe_error_check
@@ -93,5 +94,4 @@ private
       errors.add :base, "There was a problem updating your payment details."
       false
   end
-
 end

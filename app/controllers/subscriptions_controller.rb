@@ -38,29 +38,29 @@ class SubscriptionsController < ApplicationController
       redirect_to current_user, :notice => "Your payment details have been updated"
     else
       flash[:error] = "There was a problem updating your payment details. Please try again or drop us an email for assistance."
-      redirect_to edit_subscription
+      redirect_to edit_subscription_path
     end
   end
 
   def update_subscription_plan
     @subscription = current_user.subscription
 
-    if @subscription.change_subscription(plan_id: params[:plan_id])
+    if @subscription.change_subscription.save(plan_id: params[:plan_id])
       redirect_to current_user, :notice => "Your subscription plan has been changed"
     else
       flash[:error] = "There was a problem changing your subscription plan. Please try again or drop us an email for assistance."
-      redirect_to edit_subscription
+      redirect_to edit_subscription_path
     end
   end
 
   def cancel_subscription
     @subscription = current_user.subscription
 
-    if @subscription.cancel_subscription()
+    if @subscription.cancel_subscription.save()
       redirect_to current_user, :notice => "Your subscription plan has been cancelled. We're sorry to see you go."
     else
       flash[:error] = "There was a problem cancelling your subscription plan. Please try again or drop us an email for assistance."
-      redirect_to edit_subscription
+      redirect_to edit_subscription_path
     end
   end
 end
