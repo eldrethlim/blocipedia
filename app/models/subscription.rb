@@ -75,8 +75,9 @@ class Subscription < ActiveRecord::Base
     stripe_error_check
   end
     
-  def cancel_subscription
+  def cancel_subscription(cancel)
     if valid?
+      if cancel = true
       customer = Stripe::Customer.retrieve(self.stripe_customer_id)
       subscription = customer.subscriptions.retrieve(self.stripe_subscription_id).delete(:at_period_end => true)
     end

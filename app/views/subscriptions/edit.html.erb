@@ -27,8 +27,14 @@
     </td>
 </table>  
 
-<p><b> Change your payment details here </b></p>
+<div class="superspacing">
+  <p><b> Change your payment details here </b></p>
+</div>
 
 <div class="superspacing">
-  <%= render partial: 'edit_payment_details', locals: { subscription: @subscription } %>
+  <%= render partial: 'edit_payment_details' %>
+</div>
+
+<div class="superspacing">
+  <p><b> Decided to cancel your subscription? We'll be sorry to see you go! </b></p>
 </div>

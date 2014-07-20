@@ -61,5 +61,6 @@ class SubscriptionsController < ApplicationController
     else
       flash[:error] = "There was a problem cancelling your subscription plan. Please try again or drop us an email for assistance."
       redirect_to edit_subscription
+    end
   end
 end

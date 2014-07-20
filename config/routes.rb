@@ -16,9 +16,6 @@ Blocipedia::Application.routes.draw do
   # Subscription Details
   post '/update_subscription_plan' => 'subscriptions#update_subscription_plan'
 
-  # Subscription Cancellation
-  post '/cancel_subscription' => 'cancel_subscription'
-
   #Home and About Pages
   root to: 'welcome#index'
   get 'about' => 'welcome#about'

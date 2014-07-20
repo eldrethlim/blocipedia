@@ -1,0 +1,4 @@
+      <%= form_tag( { controller: 'subscriptions', action: 'cancel_subscription'}, method: 'post') do %>
+        <%= submit_tag 'Cancel my subscription', class: 'btn btn-success', data: { confirm: "Are you sure?"} %>
+        <%= hidden_field_tag :cancel, true %>
+      <% end %>
