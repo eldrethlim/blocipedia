@@ -4,6 +4,7 @@ Blocipedia::Application.routes.draw do
   get 'about' => 'welcome#about'
   get '/subscriptions/edit_payment_details' => 'subscriptions#edit_payment_details'
   post '/subscriptions/update_payment_details' => 'subscriptions#update_payment_details'
+  post '/wikis/edit' => 'collaborations#add_collaborators'
 
   devise_for :users
 
