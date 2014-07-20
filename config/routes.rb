@@ -2,7 +2,6 @@ Blocipedia::Application.routes.draw do
   
   root to: 'welcome#index'
   get 'about' => 'welcome#about'
-  get '/subscriptions/edit_payment_details' => 'subscriptions#edit_payment_details'
   post '/subscriptions/update_payment_details' => 'subscriptions#update_payment_details'
   post '/wikis/edit' => 'collaborations#add_collaborators'
 
@@ -16,5 +15,16 @@ Blocipedia::Application.routes.draw do
       resources :subpages
     end
   end
+
+  # Payment Details
+  post '/update_payment_details' => 'subscriptions#update_payment_details'
+
+  # Subscription Details
+  post '/update_subscription_plan' => 'subscriptions#update_subscription_plan'
+
+  #Home and About Pages
+  root to: 'welcome#index'
+  get 'about' => 'welcome#about'
+
 
 end
