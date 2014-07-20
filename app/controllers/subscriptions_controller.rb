@@ -20,7 +20,8 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-  def edit_payment_details
+  def edit
+    @plans = Plan.all
     @subscription = current_user.subscription
   end
 
@@ -33,11 +34,32 @@ class SubscriptionsController < ApplicationController
       cvc:       params[:cvc]
     }
 
-    if @subscription.update_card(@subscription, card_info)
+    if @subscription.update_card(card_info)
       redirect_to current_user, :notice => "Your payment details have been updated"
     else
-      flash[:error] = "There was a problem updating your payment details."
-      redirect_to current_user
+      flash[:error] = "There was a problem updating your payment details. Please try again or drop us an email for assistance."
+      redirect_to edit_subscription
     end
+  end
+
+  def update_subscription_plan
+    @subscription = current_user.subscription
+
+    if @subscription.change_subscription(plan_id: params[:plan_id])
+      redirect_to current_user, :notice => "Your subscription plan has been changed"
+    else
+      flash[:error] = "There was a problem changing your subscription plan. Please try again or drop us an email for assistance."
+      redirect_to edit_subscription
+    end
+  end
+
+  def cancel_subscription
+    @subscription = current_user.subscription
+
+    if @subscription.cancel_subscription()
+      redirect_to current_user, :notice => "Your subscription plan has been cancelled. We're sorry to see you go."
+    else
+      flash[:error] = "There was a problem cancelling your subscription plan. Please try again or drop us an email for assistance."
+      redirect_to edit_subscription
   end
 end

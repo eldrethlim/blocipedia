@@ -1,4 +1,34 @@
 <h1> Edit Subscription Plan </h2>
 
-<% if @subscription.user.present? %>
-  
+<p><b> Change your subscription plan here </b></p>
+<table class="borderless">
+  <tr>
+    <% @plans.each do |plan| %>
+      <td align="center">
+      <p><%= plan.name %></p>
+      <%= form_tag( { controller: 'subscriptions', action: 'update_subscription_plan'}, method: 'post') do %>
+        <%= submit_tag 'Choose Plan', class: 'btn btn-success' %>
+        <%= hidden_field_tag :plan_id, plan.id %>
+      <% end %>
+      </td>
+    <% end %>
+  </tr>
+  <tr>
+    <td align="center">
+      <p> Billed annually at $110 per year <br>
+          Save 20%! <br>
+          Allows you to create private wikis
+      </p>
+    </td>
+    <td align="center">
+      <p> Billed monthly at $10 per month <br>
+           Allows you to create private wikis
+      </p>
+    </td>
+</table>  
+
+<p><b> Change your payment details here </b></p>
+
+<div class="superspacing">
+  <%= render partial: 'edit_payment_details', locals: { subscription: @subscription } %>
+</div>
