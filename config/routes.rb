@@ -20,9 +20,6 @@ Blocipedia::Application.routes.draw do
   # Subscription Details
   post '/update_subscription_plan' => 'subscriptions#update_subscription_plan'
 
-  #Collaborators
-  post '/wikis/edit' => 'collaborations#add_collaborators'
-
   #Home and About Pages
   root to: 'welcome#index'
   get 'about' => 'welcome#about'
