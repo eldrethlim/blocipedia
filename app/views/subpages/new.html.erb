@@ -10,7 +10,7 @@
   <% if @subpage.errors.any? %>
     <div class="alert alert-danger">
       <ul>
-        <% @subpage.errors.full_messages each do |msg| %>
+        <% @subpage.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>
