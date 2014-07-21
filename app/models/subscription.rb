@@ -29,7 +29,10 @@ class Subscription < ActiveRecord::Base
       save!
     end
 
-    stripe_error_check
+      rescue Stripe::InvalidRequestError => e
+      logger.error "Stripe error while creating customer: #{e.message}"
+      errors.add :base, "There was a problem updating your payment details."
+      false
   end
 
   def update_card(card_info)
@@ -55,40 +58,38 @@ class Subscription < ActiveRecord::Base
       save!
     end
 
-    stripe_error_check
+      rescue Stripe::InvalidRequestError => e
+      logger.error "Stripe error while creating customer: #{e.message}"
+      errors.add :base, "There was a problem updating your payment details."
+      false
   end
 
-  def change_subscription(plan)
+  def change_subscription(plan_stripe_id)
     if valid?
 
       customer = Stripe::Customer.retrieve(self.stripe_customer_id)
       subscription = customer.subscriptions.retrieve(self.stripe_subscription_id)
-      subscription.plan = plan
+      subscription.plan = plan_stripe_id
       subscription.prorate = true
       subscription.save
-            require 'pry'; binding.pry
       
       self.stripe_subscription_id = customer.subscriptions.first.id
       save!
     end
 
-    stripe_error_check
+      rescue Stripe::InvalidRequestError => e
+      logger.error "Stripe error while creating customer: #{e.message}"
+      errors.add :base, "There was a problem updating your payment details."
+      false
   end
     
-  def cancel_subscription(cancel)
+  def cancel_subscription
     if valid?
-      if cancel = true
       customer = Stripe::Customer.retrieve(self.stripe_customer_id)
-      subscription = customer.subscriptions.retrieve(self.stripe_subscription_id).delete(:at_period_end => true)
-      end
+      subscription = customer.subscriptions.retrieve(self.stripe_subscription_id)
+      subscription.delete(:at_period_end => true)
     end
 
-    stripe_error_check
-  end
-
-private
-
-  def stripe_error_check
       rescue Stripe::InvalidRequestError => e
       logger.error "Stripe error while creating customer: #{e.message}"
       errors.add :base, "There was a problem updating your payment details."

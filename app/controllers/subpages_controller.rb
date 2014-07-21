@@ -12,7 +12,6 @@ class SubpagesController < ApplicationController
     @page = @wiki.pages.friendly.find(params[:page_id])
     @subpage = current_user.subpages.build(subpage_params)
     @subpage.page = @page
-    @subpage.wiki = @wiki
 
     authorize @subpage
     if @subpage.save
@@ -71,6 +70,6 @@ class SubpagesController < ApplicationController
   end
 
   def subpage_params
-    params.require(:subpage).permit(:name, :body, :page_id, :wiki_id)
+    params.require(:subpage).permit(:name, :body, :page_id)
   end
 end

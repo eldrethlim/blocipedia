@@ -45,7 +45,7 @@ class SubscriptionsController < ApplicationController
   def update_subscription_plan
     @subscription = current_user.subscription
 
-    if @subscription.change_subscription.save(plan_id: params[:plan_id])
+    if @subscription.change_subscription(params[:plan_stripe_id])
       redirect_to current_user, :notice => "Your subscription plan has been changed"
     else
       flash[:error] = "There was a problem changing your subscription plan. Please try again or drop us an email for assistance."
@@ -56,7 +56,7 @@ class SubscriptionsController < ApplicationController
   def cancel_subscription
     @subscription = current_user.subscription
 
-    if @subscription.cancel_subscription.save()
+    if @subscription.cancel_subscription
       redirect_to current_user, :notice => "Your subscription plan has been cancelled. We're sorry to see you go."
     else
       flash[:error] = "There was a problem cancelling your subscription plan. Please try again or drop us an email for assistance."

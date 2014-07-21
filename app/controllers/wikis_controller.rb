@@ -29,8 +29,11 @@ class WikisController < ApplicationController
 
   def update
     @wiki = Wiki.friendly.find(params[:id])
+    name = @wiki.name
+    
     authorize @wiki
     if @wiki.update_attributes(wiki_params)
+      flash[:notice] = "#{name} settings have been updated."
       redirect_to @wiki
     else
       flash[:error] = "Error saving wiki. Please try again."
@@ -55,6 +58,6 @@ class WikisController < ApplicationController
   private
 
   def wiki_params
-    params.require(:wiki).permit(:name, :body, :public)
+    params.require(:wiki).permit(:name, :body, :public, collaborator_ids: [])
   end
 end

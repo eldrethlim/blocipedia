@@ -4,15 +4,13 @@ Blocipedia::Application.routes.draw do
   resources :subscriptions
   resources :plans
   resources :wikis do
-    resources :collaborations do
-      collection do
-        put :collaborate
-      end
-    end
     resources :pages do
       resources :subpages
     end
   end
+
+  # Cancel Subscription
+  post '/cancel_subscription' => 'subscriptions#cancel_subscription'
 
   # Payment Details
   post '/update_payment_details' => 'subscriptions#update_payment_details'

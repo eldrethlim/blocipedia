@@ -3,7 +3,7 @@ class Subpage < ActiveRecord::Base
   friendly_id :name, use: :slugged
   belongs_to :user
   belongs_to :page
-  belongs_to :wiki
+  has_one :wiki, through: :page
 
   validates_presence_of :name
   after_create :set_subpage_default_body
