@@ -8,7 +8,8 @@ class Wiki < ActiveRecord::Base
   has_many :collaborators, class_name: "User", source: :user, through: :collaborations
 
   validates_presence_of :name
-  after_initialize :check_role_privacy
+  before_create :check_role_privacy
+  before_update :check_role_privacy
   before_create :set_default_privacy
   after_create :set_wiki_default_body
   
