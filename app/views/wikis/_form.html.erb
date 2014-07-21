@@ -19,43 +19,60 @@
 
   <div class="form-group">
     <div id="epiceditor"></div>
-
     <%= f.text_area :body, class: 'form-control hidden' %>
   </div>
 
-  <div class="form-group">
+  <div class="spacing">
+    <% if current_user.can_create_private_wiki? %>
+      <div class="checkbox">
+        <u>Privacy Settings</u> <br>
+        <%= f.label "Public wiki", class: 'checkbox' do %>
+          <%= f.check_box :public %> Public Wiki
+        <% end %>
+      </div>
+    <% else %>
+      <div class="checkbox" disabled="disabled" checked="checked">
+        <%= f.label "Public wiki", class: 'checkbox' do %>
+          <%= f.check_box :public, disabled: true, checked: true %> Public Wiki
+        <% end %>
+    <% end %>
+      </div>
+  </div>
+
+  <div class="form-group pagewidth">
     <%= f.submit "Save wiki", class: 'btn btn-success' %>
   </div>
+
+
 <% end %>
 
-  <div class="superspacing">
+<div class="superspacing pagewidth">
 
-    <p>Add Collaborators to <%= wiki.name %> Wiki (showing all users)</p>
+  <p>Add Collaborators to <%= wiki.name %> Wiki (showing all users)</p>
 
-    <%= form_for(@wiki) do %>
-      <table class="table spacing">
+  <%= form_for(@wiki) do %>
+    <table class="table spacing">
 
+      <tr>
+        <td><b>Name</b></td>
+        <td><b>Email</b></td>
+        <td><b>Give Access</b></td>
+      </tr>
+
+
+      <% user.each do |user| %>
         <tr>
-          <td><b>Name</b></td>
-          <td><b>Email</b></td>
-          <td><b>Give Access</b></td>
+          <td> <%= user.name %></td>
+          <td> <%= user.email %></td>
+          <td> 
+              <%= hidden_field_tag 'wiki[collaborator_ids][]', nil %>
+              <%= check_box_tag 'wiki[collaborator_ids][]', user.id, @wiki.collaborator_ids.include?(user.id), id: dom_id(user) %> 
+              <%= label_tag dom_id(user), "Add User" %>
+          </td>
         </tr>
+      <% end %>
 
-
-        <% user.each do |user| %>
-          <tr>
-            <td> <%= user.name %></td>
-            <td> <%= user.email %></td>
-            <td> 
-              <div class="checkbox">
-                <%= hidden_field_tag 'wiki[collaborator_ids][]', nil %>
-                <%= check_box_tag 'wiki[collaborator_ids][]', user.id, @wiki.collaborator_ids.include?(user.id), id: dom_id(user) %> 
-                <%= label_tag dom_id(user), "Add User" %>
-              </div>
-            </td>
-          </tr>
-        <% end %>
-
-      </table>    
-      <%= submit_tag 'Share' %>
-    <% end %>
+    </table>    
+    <%= submit_tag 'Share' %>
+  <% end %>
+</div>

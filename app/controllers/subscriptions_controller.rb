@@ -45,7 +45,7 @@ class SubscriptionsController < ApplicationController
   def update_subscription_plan
     @subscription = current_user.subscription
 
-    if @subscription.change_subscription(params[:plan_stripe_id])
+    if @subscription.change_subscription(params[:plan_stripe_id], params[:plan_id])
       redirect_to current_user, :notice => "Your subscription plan has been changed"
     else
       flash[:error] = "There was a problem changing your subscription plan. Please try again or drop us an email for assistance."

@@ -3,7 +3,7 @@
 
   Wiki Controls <br>
 <% if policy(@wiki).update? %>
-  <%= link_to "Edit Main Page", edit_wiki_path(@wiki), class: 'btn btn-success' %>
+  <%= link_to "Edit Wiki", edit_wiki_path(@wiki), class: 'btn btn-success' %>
 <% end %>
 <% if policy(@wiki).create? %>
   <%= link_to "Create New Page", new_wiki_page_path(@wiki), class: 'btn btn-success' %>

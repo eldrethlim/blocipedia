@@ -9,6 +9,7 @@
       <%= form_tag( { controller: 'subscriptions', action: 'update_subscription_plan'}, method: 'post') do %>
         <%= submit_tag 'Choose Plan', class: 'btn btn-success' %>
         <%= hidden_field_tag :plan_stripe_id, plan.stripe_id %>
+        <%= hidden_field_tag :plan_id, plan.id %>
       <% end %>
       </td>
     <% end %>

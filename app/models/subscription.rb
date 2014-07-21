@@ -64,7 +64,7 @@ class Subscription < ActiveRecord::Base
       false
   end
 
-  def change_subscription(plan_stripe_id)
+  def change_subscription(plan_stripe_id, plan_id)
     if valid?
 
       customer = Stripe::Customer.retrieve(self.stripe_customer_id)
@@ -74,6 +74,7 @@ class Subscription < ActiveRecord::Base
       subscription.save
       
       self.stripe_subscription_id = customer.subscriptions.first.id
+      self.plan_id = plan_id
       save!
     end
 

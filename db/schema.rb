@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140718125149) do
+ActiveRecord::Schema.define(version: 20140721141211) do
 
   create_table "collaborations", force: true do |t|
     t.integer "wiki_id"
@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20140718125149) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "wiki_id"
     t.string   "slug"
   end
 
@@ -56,6 +55,7 @@ ActiveRecord::Schema.define(version: 20140718125149) do
     t.string  "stripe_customer_id"
     t.string  "last4"
     t.string  "cardname"
+    t.string  "stripe_subscription_id"
   end
 
   create_table "users", force: true do |t|
