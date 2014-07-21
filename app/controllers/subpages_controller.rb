@@ -25,8 +25,8 @@ class SubpagesController < ApplicationController
 
   def show
     @wiki = Wiki.friendly.find(params[:wiki_id])
-    @page = Page.friendly.find(params[:page_id])
-    @subpage = Subpage.friendly.find(params[:id])
+    @page = @wiki.pages.friendly.find(params[:page_id])
+    @subpage = @page.subpages.friendly.find(params[:id])
   end
 
   def edit
@@ -66,7 +66,7 @@ class SubpagesController < ApplicationController
   def subpage_var
     @wiki = Wiki.friendly.find(params[:wiki_id])
     @page = @wiki.pages.friendly.find(params[:page_id])
-    @subpage = Subpage.friendly.find(params[:id])
+    @subpage = @page.subpages.friendly.find(params[:id])
     authorize @subpage
   end
 
