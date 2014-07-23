@@ -16,8 +16,6 @@ class Subscription < ActiveRecord::Base
 
       self.user = User.find_by_email(email)
       self.stripe_customer_id = customer.id
-
-       require 'pry'; binding.pry
       
       card_id = customer.default_card #card the customer used to pay
       cards = customer.cards.data # array of cards
