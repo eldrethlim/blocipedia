@@ -46,33 +46,35 @@
 
 <% end %>
 
-<div class="superspacing pagewidth">
+<% if wiki.user == user %>
+  <div class="superspacing pagewidth">
 
-  <p>Add Collaborators to <%= wiki.name %> Wiki (showing all users)</p>
+    <p>Add Collaborators to <%= wiki.name %> Wiki (showing all users)</p>
 
-  <%= form_for(@wiki) do %>
-    <table class="table spacing">
+    <%= form_for(@wiki) do %>
+      <table class="table spacing">
 
-      <tr>
-        <td><b>Name</b></td>
-        <td><b>Email</b></td>
-        <td><b>Give Access</b></td>
-      </tr>
-
-
-      <% user.each do |user| %>
         <tr>
-          <td> <%= user.name %></td>
-          <td> <%= user.email %></td>
-          <td> 
-              <%= hidden_field_tag 'wiki[collaborator_ids][]', nil %>
-              <%= check_box_tag 'wiki[collaborator_ids][]', user.id, @wiki.collaborator_ids.include?(user.id), id: dom_id(user) %> 
-              <%= label_tag dom_id(user), "Add User" %>
-          </td>
+          <td><b>Name</b></td>
+          <td><b>Email</b></td>
+          <td><b>Give Access</b></td>
         </tr>
-      <% end %>
 
-    </table>    
-    <%= submit_tag 'Share' %>
-  <% end %>
-</div>
+
+        <% user.each do |user| %>
+          <tr>
+            <td> <%= user.name %></td>
+            <td> <%= user.email %></td>
+            <td> 
+                <%= hidden_field_tag 'wiki[collaborator_ids][]', nil %>
+                <%= check_box_tag 'wiki[collaborator_ids][]', user.id, @wiki.collaborator_ids.include?(user.id), id: dom_id(user) %> 
+                <%= label_tag dom_id(user), "Add User" %>
+            </td>
+          </tr>
+        <% end %>
+
+      </table>    
+      <%= submit_tag 'Share' %>
+    <% end %>
+  </div>
+<% end %>

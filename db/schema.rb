@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721141211) do
+ActiveRecord::Schema.define(version: 20140723082931) do
 
   create_table "collaborations", force: true do |t|
     t.integer "wiki_id"
