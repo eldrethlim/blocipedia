@@ -1,9 +1,9 @@
-require 'capybara/rspec'
+require 'rails_helper'
 
 feature "ViewEditWikiButtonAsCollab" do
 
   background do 
-    user = User.new(
+    user1 = User.new(
     name: "Bob",
     username: "bob",
     email: "bob@test.com",
@@ -13,26 +13,48 @@ feature "ViewEditWikiButtonAsCollab" do
     state: "Casterly Rock",
     country: "MY"
     )
-    user.skip_confirmation!
-    user.save
-    userid = user.id
+    user1.skip_confirmation!
+    user1.save!
+    userid = user1.id
+
+    user2 = User.new(
+      name: "Adam",
+      username: "adam",
+      email: "email@test.com",
+      password: 'password',
+      address: "address",
+      postcode: "postcode",
+      state: "winterfel",
+      country: "MY"
+    )
+    user2.skip_confirmation!
+    user2.save!
+    ownerid = user2.id
+
+    @wiki = Wiki.new(
+      name: "name",
+      body: "body",
+      public: true,
+      user_id: ownerid
+      )
+    @wiki.save!
 
     collaboration = Collaboration.new(
-      wiki_id: 3,
+      wiki_id: @wiki.id,
       user_id: userid,
       )
-    collaboration.save
+    collaboration.save!
   end
 
   scenario "Signing as a collaborator and viewing the edit button" do
     visit '/users/sign_in'
-    within ('#users') do
+    within ('#new_user') do
       fill_in 'Email', :with => "bob@test.com"
       fill_in 'Password', :with => 'password'
     end
-    click_button 'Sign In'
-    click_link 'Woot'
-    current_path.should == wiki_path
+    click_button 'Sign in'
+    click_link 'name'
+    expect(current_path).to eq(wiki_path(@wiki))
     expect(page).to have_selector(:link_or_button, 'Edit Wiki')
   end
 end

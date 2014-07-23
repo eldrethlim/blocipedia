@@ -38,7 +38,7 @@ class SubscriptionsController < ApplicationController
       redirect_to current_user, :notice => "Your payment details have been updated"
     else
       flash[:error] = "There was a problem updating your payment details. Please try again or drop us an email for assistance."
-      redirect_to edit_subscription_path
+      redirect_to edit_subscription_path(@subscription)
     end
   end
 

@@ -1,7 +1,7 @@
 <div class="align-edit container">
   <div class="row">
     <div class="col-md-6">
-      <%= form_tag( { controller: 'subscriptions', action: 'update_payment_details' }, method: 'post', class: 'form-horizontal') do %>
+      <%= form_tag( { controller: 'subscriptions', action: 'update_payment_details' }, method: 'post', class: 'form-horizontal', id: 'update_payment_details') do %>
     
       <div class='form-group'>
         <%= label_tag :number, 'Card Number' %> 
