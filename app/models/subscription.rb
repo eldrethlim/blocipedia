@@ -28,9 +28,7 @@ class Subscription < ActiveRecord::Base
     end
 
       rescue Stripe::InvalidRequestError => e
-      logger.error "Stripe error while creating customer: #{e.message}"
-      errors.add :base, "There was a problem updating your payment details."
-      false
+        handle_error(e)
   end
 
   def update_card(card_info)
@@ -57,9 +55,7 @@ class Subscription < ActiveRecord::Base
     end
 
       rescue Stripe::InvalidRequestError => e
-      logger.error "Stripe error while creating customer: #{e.message}"
-      errors.add :base, "There was a problem updating your payment details."
-      false
+        handle_error(e)
   end
 
   def change_subscription(plan_stripe_id, plan_id)
@@ -77,9 +73,7 @@ class Subscription < ActiveRecord::Base
     end
 
       rescue Stripe::InvalidRequestError => e
-      logger.error "Stripe error while creating customer: #{e.message}"
-      errors.add :base, "There was a problem updating your payment details."
-      false
+        handle_error(e)
   end
     
   def cancel_subscription
@@ -90,6 +84,12 @@ class Subscription < ActiveRecord::Base
     end
 
       rescue Stripe::InvalidRequestError => e
+        handle_error(e)
+  end
+
+  private
+
+  def handle_error(e)
       logger.error "Stripe error while creating customer: #{e.message}"
       errors.add :base, "There was a problem updating your payment details."
       false
