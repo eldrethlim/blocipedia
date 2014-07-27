@@ -37,7 +37,7 @@
     </div>
   <% end %>
 
-  <% if !(user.wikis = user.collab_wikis) %>
+  <% if !(user.wikis == user.collab_wikis) %>
     <div class="spacing">
       You don't have any wikis you're managing right now, create one now!
     </div>
