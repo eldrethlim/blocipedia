@@ -8,7 +8,7 @@ class WikisController < ApplicationController
   def create
     @wiki = current_user.wikis.build(wiki_params)
     authorize @wiki
-    if @wiki.save!
+    if @wiki.save
       redirect_to @wiki, notice: "Wiki created."
     else
       flash[:error] = "Error creating wiki. Please try again."
@@ -58,6 +58,6 @@ class WikisController < ApplicationController
   private
 
   def wiki_params
-    params.require(:wiki).permit(:user_id, :name, :body, :public, collaborator_ids: [])
+    params.require(:wiki).permit(:name, :body, :public, collaborator_ids: [])
   end
 end

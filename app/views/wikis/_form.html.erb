@@ -1,80 +1,81 @@
 <!-- app/views/wikis/_form.html.erb -->
 
-<%=form_for [wiki] do |f| %>
-  <% if wiki.errors.any? %>
-    <div class="alert alert-danger">
-      <h4> There are <%= pluralize(wiki.errors.count, "error") %>.</h4>
-      <ul>
-        <% wiki.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<div>
+
+  <%=form_for [wiki] do |f| %>
+    <% if wiki.errors.any? %>
+      <div class="alert alert-danger">
+        <h4> There are <%= pluralize(wiki.errors.count, "error") %>.</h4>
+        <ul>
+          <% wiki.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label "Wiki Name" %>
+      <%= f.text_field :name, class: 'form-control', placeholder: "Enter wiki name" %>
+    </div>
+
+    <div class="form-group">
+      <div id="epiceditor"></div>
+      <%= f.text_area :body, class: 'form-control hidden' %>
+    </div>
+
+    <div class="spacing">
+      <% if current_user.can_create_private_wiki? %>
+        <div class="checkbox">
+          <u>Privacy Settings</u> <br>
+          <%= f.label "Public wiki", class: 'checkbox' do %>
+            <%= f.check_box :public %> Public Wiki
+          <% end %>
+        </div>
+      <% else %>
+        <div class="checkbox" disabled="disabled" checked="checked">
+          <%= f.label "Public wiki", class: 'checkbox' do %>
+            <%= f.check_box :public, disabled: true, checked: true %> Public Wiki
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "Save wiki", class: 'btn btn-success' %>
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label "Wiki Name" %>
-    <%= f.text_field :name, class: 'form-control', placeholder: "Enter wiki name" %>
-  </div>
+  <% if wiki.user == current_user %>
+    <div class="superspacing">
 
-  <div class="form-group">
-    <div id="epiceditor"></div>
-    <%= f.text_area :body, class: 'form-control hidden' %>
-  </div>
+      <p>Add Collaborators to <%= wiki.name %> Wiki (showing all users)</p>
 
-  <div class="spacing">
-    <% if current_user.can_create_private_wiki? %>
-      <div class="checkbox">
-        <u>Privacy Settings</u> <br>
-        <%= f.label "Public wiki", class: 'checkbox' do %>
-          <%= f.check_box :public %> Public Wiki
-        <% end %>
-      </div>
-    <% else %>
-      <div class="checkbox" disabled="disabled" checked="checked">
-        <%= f.label "Public wiki", class: 'checkbox' do %>
-          <%= f.check_box :public, disabled: true, checked: true %> Public Wiki
-        <% end %>
-    <% end %>
-      </div>
-  </div>
+      <%= form_for(@wiki) do %>
+        <table class="table spacing">
 
-  <div class="form-group pagewidth">
-    <%= f.submit "Save wiki", class: 'btn btn-success' %>
-  </div>
-
-
-<% end %>
-
-<% if wiki.user == user %>
-  <div class="superspacing pagewidth">
-
-    <p>Add Collaborators to <%= wiki.name %> Wiki (showing all users)</p>
-
-    <%= form_for(@wiki) do %>
-      <table class="table spacing">
-
-        <tr>
-          <td><b>Name</b></td>
-          <td><b>Email</b></td>
-          <td><b>Give Access</b></td>
-        </tr>
-
-
-        <% user.each do |user| %>
           <tr>
-            <td> <%= user.name %></td>
-            <td> <%= user.email %></td>
-            <td> 
-                <%= hidden_field_tag 'wiki[collaborator_ids][]', nil %>
-                <%= check_box_tag 'wiki[collaborator_ids][]', user.id, @wiki.collaborator_ids.include?(user.id), id: dom_id(user) %> 
-                <%= label_tag dom_id(user), "Add User" %>
-            </td>
+            <td><b>Name</b></td>
+            <td><b>Email</b></td>
+            <td><b>Give Access</b></td>
           </tr>
-        <% end %>
 
-      </table>    
-      <%= submit_tag 'Share' %>
-    <% end %>
-  </div>
-<% end %>
+
+          <% user.each do |user| %>
+            <tr>
+              <td> <%= user.name %></td>
+              <td> <%= user.email %></td>
+              <td> 
+                  <%= hidden_field_tag 'wiki[collaborator_ids][]', nil %>
+                  <%= check_box_tag 'wiki[collaborator_ids][]', user.id, @wiki.collaborator_ids.include?(user.id), id: dom_id(user) %> 
+                  <%= label_tag dom_id(user), "Add User" %>
+              </td>
+            </tr>
+          <% end %>
+
+        </table>    
+        <%= submit_tag 'Share' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
