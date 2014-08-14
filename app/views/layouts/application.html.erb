@@ -32,10 +32,12 @@
               <%= image_tag(current_user.profilepic.small.url) if current_user.profilepic? %>
               Welcome back <%= link_to (current_user.name), current_user %>!
               <%= link_to current_user, class: 'btn btn-primary btn-sm' do %>
+                <data-toggle="tooltip" data-placement="bottom" title="My user details">
                 <span class="glyphicon glyphicon-user"></span>
               <% end %>
 
               <%= link_to destroy_user_session_path, method: :delete, class: 'btn btn-primary btn-sm' do %>
+                <data-toggle="tooltip" data-placement="bottom" title="Log Out">
                 <span class="glyphicon glyphicon-log-out"></span>
               <% end %>
             <% else %>
