@@ -33,4 +33,8 @@ class User < ActiveRecord::Base
   def can_create_private_wiki?
     self.subscribed? || role?(:admin)
   end
+
+  def should_generate_new_friendly_id?
+    new_record?
+  end
 end

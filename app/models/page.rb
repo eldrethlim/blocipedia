@@ -13,4 +13,8 @@ class Page < ActiveRecord::Base
   def set_page_default_body
     self.update(body: "Edit your page now")
   end
+
+  def should_generate_new_friendly_id?
+    new_record?
+  end
 end

@@ -13,4 +13,8 @@ class Subpage < ActiveRecord::Base
   def set_subpage_default_body
     self.update(body: "Edit your subpage now")
   end
+
+  def should_generate_new_friendly_id?
+    new_record?
+  end
 end
