@@ -4,6 +4,9 @@
 <% if current_user %>
   <%= render partial: 'wikis/index', locals: {user: current_user} %>
 <% else %>
+  <div class="spacing jumbotron">
+    <p>Welcome to Blocipedia! This is a test site! Please read the about page for more details!</p>
+  </div>
   <div class="pad0">
     <div id="carousel-index" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
